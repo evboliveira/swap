@@ -1,0 +1,15 @@
+#######################################
+###########Basis information###########
+#######################################
+mmax= 5
+Number of sites: 4
+Dimension of local Hilbert space: 11
+V6 Strength 0.0
+all m-states are considered
+only nearest-neighbour interactions
+
+#################################################################################
+##################################
+####Calculate free rotor chain####
+##################################
+
