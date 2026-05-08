@@ -4,8 +4,10 @@ using LinearAlgebra
 using Statistics
 using FFTW
 using HDF5
-push!(LOAD_PATH,pwd())
-push!(LOAD_PATH,"../")
+using Dates
+push!(LOAD_PATH,"src/")
+# push!(LOAD_PATH,pwd())
+# push!(LOAD_PATH,"../")
 using matrices
 using states
 using expectations
@@ -13,47 +15,9 @@ using distributions
 using create_operators 
 using dvr
 using sign
+using aux_funcs
 
-function create_file(path)
-	f=open(path,"w")
-	if evod == "dvr"
-		println(f,"#Ngrid= ",mmax)
-		println(f,"#DVR basis")
-	else
-		println(f,"#mmax= ",mmax)
-		println(f,"#m-states: ",evod," states (FBR)")
-	end
-	println(f,"#Nr. of sites: ",Nsites)
-	println(f)
-	close(f)
-end
-
-function write_output(path,g,observable)
-        text=' '
-        for b=1:length(observable)
-                text*=string(observable[b],' ')
-        end
-	f=open(path,"a")
-	println(f,round(g,digits=4)," ",text)
-	close(f)
-end
-
-function write_output_error(path,g,observable,error)
-        text=' '
-        for b=1:length(observable)
-                text*=string(observable[b],' ')
-        end
-	f=open(path,"a")
-	println(f,round(g,digits=4)," ",text," ",error)
-	close(f)
-end
-
-function write_text(path,g,txt)
-	f=open(path,"a")
-	println(f,round(g,digits=4)," ",txt)
-	close(f)
-end
-
+#### AUXILIARY FUNCTIONS #### # !!! Move to the module in src/aux_suncs !!!
 function transform_realbasis(A,U)
 	tmp = BLAS.gemm('C','N', U,A)
 	B = BLAS.gemm('N','N', tmp,U)
@@ -77,7 +41,48 @@ function trans_matrix(mmax)
 	return Utrans
 end
 
+function create_file(path)
+	f=open(path,"w")
+	if evod == "dvr"
+		println(f,"#Ngrid= ",mmax)
+		println(f,"#DVR basis")
+	else
+		println(f,"#mmax= ",mmax)
+		println(f,"#m-states: ",evod," states (FBR)")
+	end
+	println(f,"#Nr. of sites: ",Nsites)
+	println(f," ")
+	close(f)
+end
 
+function write_output(path,g,observable)
+        text=' '
+        for b=1:length(observable)
+                text*=string(observable[b],' ')
+        end
+	f=open(path,"a")
+	println(f,round(g,digits=4)," ",text)
+	close(f)
+end
+
+function write_output_error(path,g,observable,error)
+        text=' '
+        for b=1:length(observable)
+                text*=string(observable[b],' ')
+        end
+	f=open(path,"a")
+	log_println(f,round(g,digits=4)," ",text," ",error)
+	close(f)
+end
+
+function write_text(path,g,txt)
+	f=open(path,"a")
+	log_println(f,round(g,digits=4)," ",txt)
+	close(f)
+end
+########################################################
+
+#### LOADING INPUT ####
 f=open("input.txt")
 lines=readlines(f)
 close(f)
@@ -114,16 +119,26 @@ lsplit=split(lines[28])
 Nstates=parse(Int64, lsplit[2])
 lsplit=split(lines[31])
 V6strength=parse(Float64, lsplit[2])
+########
 
-f=open("log","w")
+#### RESULTS PATH ####
+res_path = "./results/"
+time_stamp = Dates.format(now(),"dd-mm-yyyy_HH:MM:SS")
+res_path *= time_stamp
+mkdir(res_path)
+res_path *= "/"
+mkdir(res_path*"psi0")
+######################
 
-println(f,"#######################################")
-println(f,"###########Basis information###########")
-println(f,"#######################################")
-println(f,"mmax= ",mmax)
-println(f,"Number of sites: ",Nsites)
-println(f,"Dimension of local Hilbert space: ",2*mmax+1)
-println(f,"V6 Strength ",V6strength)
+
+f=open(res_path*"log","w")
+log_println(f,"#######################################")
+log_println(f,"###########Basis information###########")
+log_println(f,"#######################################")
+log_println(f,"mmax= ",mmax)
+log_println(f,"Number of sites: ",Nsites)
+log_println(f,"Dimension of local Hilbert space: ",2*mmax+1)
+log_println(f,"V6 Strength ",V6strength)
 
 #Calculate kinetic matrix and x operator#
 Ttmp = kinetic(mmax)
@@ -144,9 +159,9 @@ if evod == "all"
 	global Lz = Lztmp 
 	global V6 = V6tmp 
 	Nspec=size(T,1)
-	println(f,"all m-states are considered")
+	log_println(f,"all m-states are considered")
+
 elseif evod == "all_real"	
-	
 	#Real basis#
 	Utrans = trans_matrix(mmax)
 	Ttmp2 = real(transform_realbasis(Ttmp .+ 0.0im,Utrans))
@@ -168,7 +183,7 @@ elseif evod == "all_real"
 	global Lz = Lztmp2
 	global D = Dtmp
 	Nspec=size(T,1)
-	println(f,"all m-states are considered")
+	log_println(f,"all m-states are considered")
 elseif evod == "dvr"
 	tmp1,tmp2,tmp3,tmp4,tmp5 = exp_dvr(mmax)
 	global T = tmp1
@@ -180,7 +195,7 @@ elseif evod == "dvr"
 	global phi = [ii*2.0*pi/(2*mmax+1) for ii=1:(2*mmax+1)]
 	global D = distro_dvr(mmax,phi) 
 	Nspec=size(T,1)
-	println(f,"DVR-basis is used")
+	log_println(f,"DVR-basis is used")
 end
 
 #Calculate higher powers of X#
@@ -192,9 +207,9 @@ global Y3 = BLAS.gemm('N','N', Y2,Y)
 global Y4 = BLAS.gemm('N','N', Y3,Y)
 
 if pairs == "nearest"
-	println(f,"only nearest-neighbour interactions")
+	log_println(f,"only nearest-neighbour interactions")
 elseif pairs == "allpairs"
-	println(f,"all interactions")
+	log_println(f,"all interactions")
 end
 #Determine number of interaction pairs per starting site#
 Nsecond = zeros(Int64,(Nsites-1))
@@ -207,41 +222,41 @@ for i=1:Nsites-1
 end
 
 
-println(f)
-println(f,"#################################################################################")
-println(f,"##################################")
-println(f,"####Calculate free rotor chain####")
-println(f,"##################################")
-println(f)
+println(f," ")
+log_println(f,"#################################################################################")
+log_println(f,"##################################")
+log_println(f,"####Calculate free rotor chain####")
+log_println(f,"##################################")
+println(f," ")
 close(f)
 
 #Define output files#
-create_file("energy.txt")
-create_file("entropy_vN.txt")
-create_file("entropy_Renyi.txt")
-create_file("entropy_swap.txt")
-create_file("entropy_swap0.txt")
-create_file("swap0.txt")
-create_file("mux.txt")
-create_file("muy.txt")
-create_file("xcorr.txt")
-create_file("ycorr.txt")
-create_file("corr.txt")
-create_file("mcorr.txt")
-create_file("binder_x.txt")
-create_file("binder_y.txt")
-create_file("tau.txt")
-create_file("tau_sample.txt")
-create_file("cplane_sample.txt")
-create_file("cplane.txt")
+create_file(res_path*"energy.txt")
+create_file(res_path*"entropy_vN.txt")
+create_file(res_path*"entropy_Renyi.txt")
+create_file(res_path*"entropy_swap.txt")
+create_file(res_path*"entropy_swap0.txt")
+create_file(res_path*"swap0.txt")
+create_file(res_path*"mux.txt")
+create_file(res_path*"muy.txt")
+create_file(res_path*"xcorr.txt")
+create_file(res_path*"ycorr.txt")
+create_file(res_path*"corr.txt")
+create_file(res_path*"mcorr.txt")
+create_file(res_path*"binder_x.txt")
+create_file(res_path*"binder_y.txt")
+create_file(res_path*"tau.txt")
+create_file(res_path*"tau_sample.txt")
+create_file(res_path*"cplane_sample.txt")
+create_file(res_path*"cplane.txt")
 if Nstates > 0
 	for i=1:Nstates+1
-		create_file("schmidt_values_"*string(i)*".txt")
-		create_file("phi_distribution_"*string(i)*".txt")
+		create_file(res_path*"schmidt_values_"*string(i)*".txt")
+		create_file(res_path*"phi_distribution_"*string(i)*".txt")
 	end
 else
-	create_file("schmidt_values.txt")
-	create_file("phi_distribution.txt")
+	create_file(res_path*"schmidt_values.txt")
+	create_file(res_path*"phi_distribution.txt")
 end
 
 operators(Nspec,Nphi,evod)
@@ -264,8 +279,8 @@ end
 #for ig = 0:Ng-1
 for ig = 0:length(listg)-1
 let
-	include("operators.jl")
-	include("observer.jl")
+	include("src/operators.jl")
+	include("src/observer.jl")
 
 	if evod == "dvr" || evod == "all_real"
 		fac1 = 1.0
@@ -301,25 +316,25 @@ let
 		
 		global psi0 = psi
 		maxbond=maxlinkdim(psi)
-		f=open("log","a")
-		println(f,"Max. bond dimension: ",maxbond)
-		println(f)
+		f=open(res_path*"log","a")
+		log_println(f,"Max. bond dimension: ",maxbond)
+		println(f," ")
 		@printf(f,"Final energy = %.8f \n",energy)
-		println(f)
-		println(f,"Initial state calculated")
-		println(f,"###############################################################################")
-		println(f)
+		println(f," ")
+		log_println(f,"Initial state calculated")
+		log_println(f,"###############################################################################")
+		println(f," ")
 		close(f)
 	end	
 	#g = gstart + ig*delta_g
 	g= listg[ig+1]
-	f=open("log","a")
-	println(f,"##################################")
-	println(f,"########g= ",g," ########")
-	println(f,"##################################")
-	println(f)
-	println(f,"####DMRG calculation####")
-	println(f,"Construct MPO")
+	f=open(res_path*"log","a")
+	log_println(f,"##################################")
+	log_println(f,"########g= ",g," ########")
+	log_println(f,"##################################")
+	println(f," ")
+	log_println(f,"####DMRG calculation####")
+	log_println(f,"Construct MPO")
 	
 
 	sites = siteinds(psi0)
@@ -347,21 +362,21 @@ let
 
 
 	H = MPO(ampo,sites)
-        #Define accuracy parameters#
-        sweeps = Sweeps(Nsweep)
-        #Set up initial state#
-        cutoff!(sweeps,SVD_error) # desired truncation error
-        if ig == 0
-			maxdim!(sweeps,10,20,30,40,Nbonds) # gradually increase states kept
-		else	
-			maxdim!(sweeps,maxlinkdim(psi0),Nbonds)
-		end
+	#Define accuracy parameters#
+	sweeps = Sweeps(Nsweep)
+	#Set up initial state#
+	cutoff!(sweeps,SVD_error) # desired truncation error
+	if ig == 0
+		maxdim!(sweeps,10,20,30,40,Nbonds) # gradually increase states kept
+	else	
+		maxdim!(sweeps,maxlinkdim(psi0),Nbonds)
+	end
 
-        #Perform DMRG runs#
-        println(f,"Start DMRG run")
-        close(f)
-        obs = DemoObserver(e_cutoff)
-        energy,psi = dmrg(H,psi0,sweeps,observer=obs, outputlevel=0)
+	#Perform DMRG runs#
+	log_println(f,"Start DMRG run")
+	close(f)
+	obs = DemoObserver(e_cutoff)
+	energy,psi = dmrg(H,psi0,sweeps,observer=obs, outputlevel=0)
 
 		
 
@@ -369,18 +384,18 @@ let
 	#Check sign structure#
 #	tm_exact,tp_exact = sign_structure(psi,Nsites,Nspec)
 #
-#	ft=open("tau.txt","a")
+#	ft=open(res_path*"tau.txt","a")
 #	println(ft,round(g,digits=4),"   ",tm_exact,"  ",tp_exact)
 #	close(ft)
 	
 #	tm_sample,tp_sample = sample_sign(psi,Nsites,10000)
-#	ft=open("tau_sample.txt","a")
+#	ft=open(res_path*"tau_sample.txt","a")
 #	println(ft,round(g,digits=4),"   ",tm_sample,"  ",tp_sample)
 #	close(ft)
 
 #	Nsample=10000
 #	real_part,imag_part = sample_sign_cplane(psi,Nsites,Nsample)
-#	ft=open("cplane_sample.txt","a")
+#	ft=open(res_path*"cplane_sample.txt","a")
 #	for ii=1:Nsample
 #		println(ft,round(g,digits=4),"   ",real_part[ii],"  ",imag_part[ii])
 #	end
@@ -388,7 +403,7 @@ let
 #	println(ft)
 #	close(ft)
 #	coeff =  sample_cplane(psi,Nsites,Nspec)
-#	ft=open("cplane.txt","a")
+#	ft=open(res_path*"cplane.txt","a")
 #	for ii=1:Nspec^3
 #		println(ft,round(g,digits=4),"   ",real(coeff[ii]),"  ",imag(coeff[ii]))
 #	end
@@ -398,7 +413,7 @@ let
 	#################################################################
 
 
-	mps_out=h5open(string("psi0_g",string(round(g,digits=3))),"w")
+	mps_out=h5open(string(res_path*"psi0/"*"psi0_g",string(round(g,digits=3))),"w")
 	write(mps_out,"MPS",psi)
 	close(mps_out)
 
@@ -406,13 +421,13 @@ let
 
 	global psi0 = psi
 
-        f=open("log","a")
-        println(f)
+        f=open(res_path*"log","a")
+        println(f," ")
         maxbond=maxlinkdim(psi)
-        println(f,"Max. bond dimension: ",maxbond)
-        println(f)
+        log_println(f,"Max. bond dimension: ",maxbond)
+        println(f," ")
         @printf(f,"Final energy = %.8f \n",energy)
-        println(f)
+        println(f," ")
         close(f)
 
 	if Nstates != 0
@@ -433,9 +448,9 @@ let
 	        	cutoff!(sweeps,SVD_error) # desired truncation error
 	        	energy ,psi = dmrg(H,wavefunction[1:istates],initial_states[istates] ,sweeps, observer=obs, outputlevel=0)
 	        	global initial_states[istates] = psi
-	        	f2=open("log","a")
+	        	f2=open(res_path*"log","a")
 	        	maxbond=maxlinkdim(psi)
-	        	println(f,"Max. bond dimension: ",maxbond)
+	        	log_println(f,"Max. bond dimension: ",maxbond)
 	        	println(f2)
 	        	println(f2,"Final energy "*string(istates)*". excited state= "*string(round(energy,digits=12))*"\n")
         		println(f2)
@@ -458,7 +473,7 @@ let
 			#Calculate von-Neumann entropy and Schmidt coefficients#
 			SvN,Renyi,Svalues = vN_entropy(wavefunction[istates],mbond)
 		
-			write_output("schmidt_values_"*string(istates)*".txt",g,Svalues)
+			write_output(res_path*"schmidt_values_"*string(istates)*".txt",g,Svalues)
 			
 			#Calculate dipole correlations#
 			xcorr,ycorr = correlation(wavefunction[istates],Nsites,Nspec,evod,X,Y)
@@ -473,7 +488,7 @@ let
 			#Write phi distribution#	
 			Pphi = get_pphi(psi,Nsites,Nphi,Nspec,D)
 			
-			fd=open("phi_distribution_"*string(istates)*".txt","a")
+			fd=open(res_path*"phi_distribution_"*string(istates)*".txt","a")
 	                for ip=1:Nphi
 	                        text=' '
 	                        for b=1:Nsites
@@ -497,58 +512,58 @@ let
 
 		end	
 
-		write_text("energy.txt",g,text_energy)
-		write_text("entropy.txt",g,text_ent)
-		write_text("xcorr.txt",g,text_xcorr)
-		write_text("ycorr.txt",g,text_ycorr)
-		write_text("corr.txt",g,text_corr)
-		write_text("mux.txt",g,text_mux)
-		write_text("muy.txt",g,text_muy)
+		write_text(res_path*"energy.txt",g,text_energy)
+		write_text(res_path*"entropy.txt",g,text_ent)
+		write_text(res_path*"xcorr.txt",g,text_xcorr)
+		write_text(res_path*"ycorr.txt",g,text_ycorr)
+		write_text(res_path*"corr.txt",g,text_corr)
+		write_text(res_path*"mux.txt",g,text_mux)
+		write_text(res_path*"muy.txt",g,text_muy)
 		if evod == "all" || evod == "all_real"	
-			write_text("mcorr.txt",g,text_corr)
+			write_text(res_path*"mcorr.txt",g,text_corr)
 		end
 	else
 		#Write energy to file#
-		f=open("energy.txt","a")
+		f=open(res_path*"energy.txt","a")
 		println(f,round(g,digits=4)," ",energy)
 		close(f)
 	
 		#Write entropy and Schmidt values to file#
 		SvN,Renyi,Svalues = vN_entropy(psi,mbond)
 	
-		write_output("entropy_vN.txt",g,SvN)
-		write_output("entropy_Renyi.txt",g,Renyi)
-		write_output("schmidt_values.txt",g,Svalues)
+		write_output(res_path*"entropy_vN.txt",g,SvN)
+		write_output(res_path*"entropy_Renyi.txt",g,Renyi)
+		write_output(res_path*"schmidt_values.txt",g,Svalues)
 		
 		#Write nearest-neighbour correlation to file#
 		xcorr,ycorr = correlation(psi,Nsites,Nspec,evod,X,Y)
 		
-		write_output("xcorr.txt",g,xcorr)
-		write_output("ycorr.txt",g,ycorr)
-		write_output("corr.txt",g,(xcorr+ycorr)/(Nsites-1))
+		write_output(res_path*"xcorr.txt",g,xcorr)
+		write_output(res_path*"ycorr.txt",g,ycorr)
+		write_output(res_path*"corr.txt",g,(xcorr+ycorr)/(Nsites-1))
 
 		#Write angular nearest-neighbour correlation to file#
 		mcorr = ang_correlation(psi,Nsites,Nspec,evod,Lz)
 		
-		write_output("mcorr.txt",g,(mcorr)/(Nsites-1))
+		write_output(res_path*"mcorr.txt",g,(mcorr)/(Nsites-1))
 		
 		#Write polarization to file#
 		MuX,MuY = polarization(psi,Nsites,Nspec,evod,X,Y)
 	
-		write_output("mux.txt",g,MuX)
-		write_output("muy.txt",g,MuY)
+		write_output(res_path*"mux.txt",g,MuX)
+		write_output(res_path*"muy.txt",g,MuY)
 
 		#Binder parameter#
 		Mx2,My2,bindX,bindY = binder(psi,Nspec,X,Y)
 
-		write_output("binder_x.txt",g,[Mx2,bindX])
-		write_output("binder_y.txt",g,[My2,bindY])
+		write_output(res_path*"binder_x.txt",g,[Mx2,bindX])
+		write_output(res_path*"binder_y.txt",g,[My2,bindY])
 
 
 		#Write phi distribution#	
 		Pphi = get_pphi(psi,Nsites,Nphi,Nspec,D)
 
-		fd=open("phi_distribution.txt","a")
+		fd=open(res_path*"phi_distribution.txt","a")
                 for ip=1:Nphi
                         text=' '
                         for b=1:Nsites
@@ -564,7 +579,9 @@ let
 
 end
 end
-f=open("log","a")
-println(f)
-println(f,"Calculation finished.")
+f=open(res_path*"log","a")
+println(f," ")
+log_println(f,"Calculation finished.")
 close(f)
+
+mv("log", res_path*"logDMRG")
