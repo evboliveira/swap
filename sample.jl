@@ -53,35 +53,6 @@ function write_output_error(path,g,observable,error)
 	println(f,round(g,digits=4)," ",text," ",error)
 	close(f)
 end
-
-function write_text(path,g,txt)
-	f=open(path,"a")
-	println(f,round(g,digits=4)," ",txt)
-	close(f)
-end
-
-function transform_realbasis(A,U)
-	tmp = BLAS.gemm('C','N', U,A)
-	B = BLAS.gemm('N','N', tmp,U)
-
-	return B
-end
-
-function trans_matrix(mmax)
-	Utrans = zeros(ComplexF64,(2*mmax+1,2*mmax+1))
-
-	for m=1:mmax
-		Utrans[m,m] = 1.0/sqrt(2.0)
-		Utrans[m,2*mmax+2-m] = 1.0im/sqrt(2.0)
-	end
-	Utrans[mmax+1,mmax+1] = 1.0
-	for m=1:mmax
-		Utrans[2*mmax+2-m,m] = 1.0/sqrt(2.0)
-		Utrans[2*mmax+2-m,2*mmax+2-m] = -1.0im/sqrt(2.0)
-	end
-	
-	return Utrans
-end
 ########################################################
 
 #### LOADING INPUT ####
@@ -127,20 +98,11 @@ V6strength=parse(Float64, lsplit[2])
 res_path = "./results/N$(Nsites)/"
 ######################
 
-f=open(res_path*"log_sample","w")
-log_println(f,"#######################################")
-log_println(f,"###########Basis information###########")
-log_println(f,"#######################################")
-log_println(f,"mmax= ",mmax)
-log_println(f,"Number of sites: ",Nsites)
-log_println(f,"Dimension of local Hilbert space: ",2*mmax+1)
-log_println(f,"V6 Strength ",V6strength)
-
 #Define output files#
-create_file("L.txt")
-create_file("entropy_swap.txt")
-create_file("NMentropy_swap.txt")
-create_file("NMswap.txt")
+create_file(res_path*"L.txt")
+create_file(res_path*"entropy_swap.txt")
+create_file(res_path*"NMentropy_swap.txt")
+create_file(res_path*"NMswap.txt")
 
 #### Int Strength g values ####
 listg=[]
@@ -165,7 +127,7 @@ for ig = 0:length(listg)-1
 		psi=read(mps_out,"MPS",MPS)
 		close(mps_out)
 
-		data_out=open(string("L",string(round(g,digits=3))),"w")
+		data_out=open(string(res_path*"L",string(round(g,digits=3))),"w")
 		sites = siteinds(psi)
 		#psi = orthogonalize(psi, 1)
 
@@ -204,10 +166,10 @@ for ig = 0:length(listg)-1
 			#####
 
 			## Lattice Bipartite sampling ##
-			latt_swap1[Na+1:Nsites] = rep1[N+1:Nsites] ## 1B --> 1B
+			latt_swap1[Na+1:Nsites] = rep1[Na+1:Nsites] ## 1B --> 1B
 			latt_swap1[1:Na] = rep2[1:Na] 			   ## 1A --> 2A
 			latt_swap2[1:Na] = rep1[1:Na]              ## 2A --> 1A
-			latt_swap2[Na+1:Nsites] = rep2[N+1:Nsites] ## 2B --> 2B
+			latt_swap2[Na+1:Nsites] = rep2[Na+1:Nsites] ## 2B --> 2B
 
 			if fast
 				V1 = ITensor(1.)
@@ -255,7 +217,7 @@ for ig = 0:length(listg)-1
 			for i=1:Nsites
 				if NMaux1[i] > (2*mmax+1)
 					println("basis state out of range",NMaux1[i])
-					st1[i]=2*mmax+1
+					NMaux1[i]=2*mmax+1
 				elseif NMaux1[i] < 1
 					println("basis state out of range",NMaux1[i])
 					NMaux1[i]=1
@@ -267,8 +229,8 @@ for ig = 0:length(listg)-1
 					println("basis state out of range",NMaux2[i])
 					NMaux2[i]=1
 				end
-				inv_NMlatt_swap1[i]=round(Int,NMaux2[i])
-				inv_NMlatt_swap1[i]=round(Int,NMaux2[i])
+				inv_NMlatt_swap1[i]=round(Int,NMaux1[i])
+				inv_NMlatt_swap2[i]=round(Int,NMaux2[i])
 			end
 
 			V1 = ITensor(1.)
@@ -315,13 +277,11 @@ for ig = 0:length(listg)-1
 		# Perform the K-S test
 		ks_test = ExactOneSampleKSTest(totalLbin, d)
 
-		#histogram(totalL)
-
 		observable=[mean(totalL),sqrt(var(totalL)/Nsamples),var(totalL),SB.skewness(totalL),SB.kurtosis(totalL),pvalue(ks_test)]
-		write_output("L.txt",g,observable)
-		write_output_error("entropy_swap.txt",g,S2,error)
-		write_output_error("NMentropy_swap.txt",g,NM_S2,NMerror)
-		write_output_error("NMswap.txt",g,NMswap_avg,sqrt(var(NMswap)/Nsamples))
+		write_output(res_path*"L.txt",g,observable)
+		write_output_error(res_path*"entropy_swap.txt",g,S2,error)
+		write_output_error(res_path*"NMentropy_swap.txt",g,NM_S2,NMerror)
+		write_output_error(res_path*"NMswap.txt",g,NMswap_avg,sqrt(var(NMswap)/Nsamples))
 
 	end
 end

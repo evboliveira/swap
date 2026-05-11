@@ -577,3 +577,4 @@ log_println(f,"Calculation finished.")
 close(f)
 
 mv("log", res_path*"logDMRG")
+cp("input.txt", res_path*"input.txt")
