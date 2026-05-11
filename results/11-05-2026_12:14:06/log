@@ -1,0 +1,89 @@
+#######################################
+###########Basis information###########
+#######################################
+mmax= 5
+Number of sites: 45
+Dimension of local Hilbert space: 11
+V6 Strength 0.0
+all m-states are considered
+only nearest-neighbour interactions
+ 
+#################################################################################
+##################################
+####Calculate free rotor chain####
+##################################
+ 
+Max. bond dimension: 1
+ 
+Final energy = 0.00000000 
+ 
+Initial state calculated
+###############################################################################
+ 
+##################################
+########g= 0.0 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 1
+ 
+Final energy = 0.00000000 
+ 
+##################################
+########g= 0.1 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 6
+ 
+Final energy = -0.27570851 
+ 
+##################################
+########g= 0.2 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 7
+ 
+Final energy = -1.11191583 
+ 
+##################################
+########g= 0.3 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 10
+ 
+Final energy = -2.54077433 
+ 
+##################################
+########g= 0.4 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 16
+ 
+Final energy = -4.63921177 
+ 
+##################################
+########g= 0.41 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run

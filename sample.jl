@@ -8,8 +8,9 @@ import Distributions as Dist
 using FFTW
 using Plots
 using HDF5
-push!(LOAD_PATH,pwd())
-push!(LOAD_PATH,"../")
+push!(LOAD_PATH,"src/")
+# push!(LOAD_PATH,pwd())
+# push!(LOAD_PATH,"../")
 using matrices
 using states
 using expectations
@@ -18,6 +19,7 @@ using create_operators
 using dvr
 using sign
 
+#### AUXILIARY FUNCTIONS #### # !!! Move to the module in src/aux_suncs !!!
 function create_file(path)
 	f=open(path,"w")
 	if evod == "dvr"
@@ -80,8 +82,9 @@ function trans_matrix(mmax)
 	
 	return Utrans
 end
+########################################################
 
-
+#### LOADING INPUT ####
 f=open("input.txt")
 lines=readlines(f)
 close(f)
@@ -118,106 +121,20 @@ lsplit=split(lines[28])
 Nstates=parse(Int64, lsplit[2])
 lsplit=split(lines[31])
 V6strength=parse(Float64, lsplit[2])
+########
 
-f=open("log","w")
+#### RESULTS PATH ####
+res_path = "./results/N$(N)/"
+######################
 
-println(f,"#######################################")
-println(f,"###########Basis information###########")
-println(f,"#######################################")
-println(f,"mmax= ",mmax)
-println(f,"Number of sites: ",Nsites)
-println(f,"Dimension of local Hilbert space: ",2*mmax+1)
-println(f,"V6 Strength ",V6strength)
-
-#Calculate kinetic matrix and x operator#
-Ttmp = kinetic(mmax)
-Xtmp = Xoperator(mmax)
-Ytmp = Yoperator(mmax)
-Lztmp = lz_operator(mmax)
-V6tmp = V6_operator(mmax)
-
-#Define basis#
-if evod == "all"
-	Nphi=90
-	global phi = [ii*2.0*pi/Nphi for ii=1:Nphi] 
-	Dtmp = distro_complex(mmax,phi) 
-	global T = Ttmp
-	global X = Xtmp
-	global Y = Ytmp
-	global D = Dtmp
-	global Lz = Lztmp 
-	global V6 = V6tmp 
-	Nspec=size(T,1)
-	println(f,"all m-states are considered")
-elseif evod == "all_real"	
-	
-	#Real basis#
-	Utrans = trans_matrix(mmax)
-	Ttmp2 = real(transform_realbasis(Ttmp .+ 0.0im,Utrans))
-	Xtmp2 = real(transform_realbasis(Xtmp .+ 0.0im,Utrans))
-	Ytmp2 = real(transform_realbasis(1.0im*Ytmp,Utrans))
-	Lztmp2 = imag(transform_realbasis(Lztmp .+ 0.0im,Utrans))
-	
-	Nphi=90
-	global phi = [ii*2.0*pi/Nphi for ii=1:Nphi] 
-	Dcomp = distro_complex(mmax,phi) 
-	Dtmp = zeros(Float64,(2*mmax+1,2*mmax+1,Nphi))
-	for ip=1:Nphi
-		Dtmp[:,:,ip] = real(transform_realbasis(Dcomp[:,:,ip],Utrans))	
-	end
-
-	global T = Ttmp2
-	global X = Xtmp2
-	global Y = Ytmp2
-	global Lz = Lztmp2
-	global D = Dtmp
-	Nspec=size(T,1)
-	println(f,"all m-states are considered")
-elseif evod == "dvr"
-	tmp1,tmp2,tmp3,tmp4,tmp5 = exp_dvr(mmax)
-	global T = tmp1
-	global X = tmp2
-	global Y = tmp3
-	global Lz = imag(tmp4)
-	global V6= tmp5
-	Nphi=2*mmax+1
-	global phi = [ii*2.0*pi/(2*mmax+1) for ii=1:(2*mmax+1)]
-	global D = distro_dvr(mmax,phi) 
-	Nspec=size(T,1)
-	println(f,"DVR-basis is used")
-end
-
-#Calculate higher powers of X#
-global X2 = BLAS.gemm('N','N', X,X)
-global X3 = BLAS.gemm('N','N', X2,X)
-global X4 = BLAS.gemm('N','N', X3,X)
-global Y2 = BLAS.gemm('N','N', Y,Y)
-global Y3 = BLAS.gemm('N','N', Y2,Y)
-global Y4 = BLAS.gemm('N','N', Y3,Y)
-
-if pairs == "nearest"
-	println(f,"only nearest-neighbour interactions")
-elseif pairs == "allpairs"
-	println(f,"all interactions")
-end
-#Determine number of interaction pairs per starting site#
-Nsecond = zeros(Int64,(Nsites-1))
-for i=1:Nsites-1
-        if pairs == "nearest"
-                Nsecond[i]=i+1
-        elseif pairs == "allpairs"
-                Nsecond[i]=Nsites
-        end
-end
-
-
-println(f)
-println(f,"#################################################################################")
-println(f,"##################################")
-println(f,"####Calculate free rotor chain####")
-println(f,"##################################")
-println(f)
-close(f)
+f=open(res_path*"log_sample","w")
+log_println(f,"#######################################")
+log_println(f,"###########Basis information###########")
+log_println(f,"#######################################")
+log_println(f,"mmax= ",mmax)
+log_println(f,"Number of sites: ",Nsites)
+log_println(f,"Dimension of local Hilbert space: ",2*mmax+1)
+log_println(f,"V6 Strength ",V6strength)
 
 #Define output files#
 create_file("L.txt")
@@ -225,27 +142,24 @@ create_file("entropy_swap.txt")
 create_file("entropy_swap0.txt")
 create_file("swap0.txt")
 
-
-
+#### Int Strength g values ####
 listg=[]
+# listg = [g for g = 0.1 : 0.1 : 2.0]
+listg = append!(
+    [g for g = 0.0 : 0.1 : 0.4],
+    [g for g = 0.41 : 0.01 : 0.60],
+    [g for g = 0.7 : 0.1 : 3.0])
+Ng = length(listg)
+################################
 
-for ii=0:4
-	push!(listg,0.1*ii)
-end
+#### SAMPLING PROCEDURE #####
+Nsamples = 4000
+Na=mbond
 
-for ii=1:20
-	push!(listg,0.4+0.01*ii)
-end
-
-for ii=1:24
-	push!(listg,0.6+0.1*ii)
-end
-
-#listg=[0.5,0.7,1.1,1.5,2.0]
-#for ig = 0:Ng-1
 f=open("sample","w")
 
-fast=0
+fast = true #Fast sampling?
+
 for ig = 0:length(listg)-1
 	let
 		g= listg[ig+1]
@@ -255,40 +169,46 @@ for ig = 0:length(listg)-1
 
 		data_out=open(string("L",string(round(g,digits=3))),"w")
 		sites = siteinds(psi)
-
-		Na=mbond
 		#psi = orthogonalize(psi, 1)
-		Nsamples=4000
 
-
+		## Lattice Bipartite samples ##
 		sample1_a=zeros(Int64,(Na))
 		sample1_b=zeros(Int64,(Na))
 		sample2_a=zeros(Int64,(Na))
 		sample2_b=zeros(Int64,(Na))
 
+		sample_swap1=zeros(Int64,(Nsites))
+		sample_swap2=zeros(Int64,(Nsites))
+
+		swap=zeros(Float64,Nsamples)
+		####
+
+		## Lattice NM samples ##
 		qsample1_a=zeros(Float64,(1))
 		qsample1_b=zeros(Float64,(Nsites-1))
 		qsample2_a=zeros(Float64,(1))
 		qsample2_b=zeros(Float64,(Nsites-1))
 
-		sample_swap1=zeros(Int64,(Nsites))
-		sample_swap2=zeros(Int64,(Nsites))
-
 		qsample_swap1=zeros(Float64,(Nsites))
 		qsample_swap2=zeros(Float64,(Nsites))
-
 		inv_qsample_swap1=zeros(Int64,(Nsites))
 		inv_qsample_swap2=zeros(Int64,(Nsites))
-
-		swap=zeros(Float64,Nsamples)
+		
 		swap0=zeros(Float64,Nsamples)
-		totalL=zeros(Float64,Nsamples)
-		totalLbin=zeros(Int64,Nsamples)
+		####
 
+		## Total Ang. Mom. stats. ##
+		totalL=zeros(Float64,Nsamples)
+		totalLbin=zeros(Int64,Nsamples)		
 		nbin=(2*mmax+1)*Nsites
+		####
 
 		for conf=1:Nsamples
-			s1=sample(psi)
+			
+			s1=sample(psi) ## replica 1
+			s2=sample(psi) ## replica 2
+
+			## Total Ang Mom Stats ##
 			L=0
 			Lbin=0
 			for i=1:Nsites
@@ -297,17 +217,28 @@ for ig = 0:length(listg)-1
 			end
 			totalL[conf]=L
 			totalLbin[conf]=Lbin/2
-			s2=sample(psi)
+			#####
 
+			## Lattice Bipartite sampling ##
 			for i=1:Na
 				sample1_a[i]= s1[i]
 				sample2_a[i]= s2[i]
 				sample1_b[i]= s1[i+Na]
 				sample2_b[i]= s2[i+Na]
 			end
+			for i=1:Na
+				sample_swap1[i]=sample2_a[i]
+				sample_swap1[i+Na]=sample1_b[i]
+				sample_swap2[i]=sample1_a[i]
+				sample_swap2[i+Na]=sample2_b[i]
+			end
+			#####
 
+			## discrete cosine transforms ##
 			qs1=dct(s1)
 			qs2=dct(s2)
+			####
+			
 			qsample1_a[1]= qs1[1]
 			qsample2_a[1]= qs2[1]
 			for i=2:Nsites
@@ -315,12 +246,7 @@ for ig = 0:length(listg)-1
 				qsample2_b[i-1]= qs2[i]
 			end
 
-			for i=1:Na
-				sample_swap1[i]=sample2_a[i]
-				sample_swap1[i+Na]=sample1_b[i]
-				sample_swap2[i]=sample1_a[i]
-				sample_swap2[i+Na]=sample2_b[i]
-			end
+			
 			qsample_swap1[1]=qsample2_a[1]
 			qsample_swap2[1]=qsample1_a[1]
 			for i=2:Nsites
@@ -356,7 +282,7 @@ for ig = 0:length(listg)-1
 			end
 
 			sw1=sample_swap1[:]
-			if fast==0
+			if fast
 				V = ITensor(1.)
 				for j=1:Nsites
 					V *= (psi[j]*state(sites[j],sw1[j]))
@@ -367,7 +293,7 @@ for ig = 0:length(listg)-1
 			end
 
 			sw2=sample_swap2[:]
-			if fast==0
+			if fast
 				V = ITensor(1.)
 				for j=1:Nsites
 					V *= (psi[j]*state(sites[j],sw2[j]))
@@ -377,7 +303,7 @@ for ig = 0:length(listg)-1
 				wf2=inner(MPS(sites,sw2),psi)
 			end
 
-			if fast==0
+			if fast
 				V = ITensor(1.)
 				for j=1:Nsites
 					V *= (psi[j]*state(sites[j],s1[j]))
@@ -387,7 +313,7 @@ for ig = 0:length(listg)-1
 				wf3=inner(MPS(sites,s1),psi)
 			end
 			
-			if fast==0
+			if fast
 				V = ITensor(1.)
 				for j=1:Nsites
 					V *= (psi[j]*state(sites[j],s2[j]))

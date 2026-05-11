@@ -234,9 +234,9 @@ close(f)
 create_file(res_path*"energy.txt")
 create_file(res_path*"entropy_vN.txt")
 create_file(res_path*"entropy_Renyi.txt")
-create_file(res_path*"entropy_swap.txt")
-create_file(res_path*"entropy_swap0.txt")
-create_file(res_path*"swap0.txt")
+# create_file(res_path*"entropy_swap.txt")
+# create_file(res_path*"entropy_swap0.txt")
+# create_file(res_path*"swap0.txt")
 create_file(res_path*"mux.txt")
 create_file(res_path*"muy.txt")
 create_file(res_path*"xcorr.txt")
@@ -245,10 +245,10 @@ create_file(res_path*"corr.txt")
 create_file(res_path*"mcorr.txt")
 create_file(res_path*"binder_x.txt")
 create_file(res_path*"binder_y.txt")
-create_file(res_path*"tau.txt")
-create_file(res_path*"tau_sample.txt")
-create_file(res_path*"cplane_sample.txt")
-create_file(res_path*"cplane.txt")
+# create_file(res_path*"tau.txt")
+# create_file(res_path*"tau_sample.txt")
+# create_file(res_path*"cplane_sample.txt")
+# create_file(res_path*"cplane.txt")
 if Nstates > 0
 	for i=1:Nstates+1
 		create_file(res_path*"schmidt_values_"*string(i)*".txt")
@@ -262,22 +262,14 @@ end
 operators(Nspec,Nphi,evod)
 
 listg=[]
+# listg = [g for g = 0.1 : 0.1 : 2.0]
+listg = append!(
+    [g for g = 0.0 : 0.1 : 0.4],
+    [g for g = 0.41 : 0.01 : 0.60],
+    [g for g = 0.7 : 0.1 : 3.0])
+Ng = length(listg)
 
-for ii=0:4
-	push!(listg,0.1*ii)
-end
-
-for ii=1:20
-	push!(listg,0.4+0.01*ii)
-end
-
-for ii=1:24
-	push!(listg,0.6+0.1*ii)
-end
-
-
-#for ig = 0:Ng-1
-for ig = 0:length(listg)-1
+for ig = 0:Ng-1
 let
 	include("src/operators.jl")
 	include("src/observer.jl")

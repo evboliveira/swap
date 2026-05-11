@@ -1,0 +1,262 @@
+#######################################
+###########Basis information###########
+#######################################
+mmax= 5
+Number of sites: 45
+Dimension of local Hilbert space: 11
+V6 Strength 0.0
+all m-states are considered
+only nearest-neighbour interactions
+ 
+#################################################################################
+##################################
+####Calculate free rotor chain####
+##################################
+ 
+Max. bond dimension: 1
+ 
+Final energy = 0.00000000 
+ 
+Initial state calculated
+###############################################################################
+ 
+##################################
+########g= 0.0 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 1
+ 
+Final energy = 0.00000000 
+ 
+##################################
+########g= 0.1 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 6
+ 
+Final energy = -0.27570851 
+ 
+##################################
+########g= 0.2 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 7
+ 
+Final energy = -1.11191584 
+ 
+##################################
+########g= 0.3 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 10
+ 
+Final energy = -2.54077433 
+ 
+##################################
+########g= 0.4 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 16
+ 
+Final energy = -4.63921169 
+ 
+##################################
+########g= 0.41 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 16
+ 
+Final energy = -4.89168845 
+ 
+##################################
+########g= 0.42 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 17
+ 
+Final energy = -5.15296528 
+ 
+##################################
+########g= 0.43 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 18
+ 
+Final energy = -5.42343791 
+ 
+##################################
+########g= 0.44 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 19
+ 
+Final energy = -5.70357270 
+ 
+##################################
+########g= 0.45 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 20
+ 
+Final energy = -5.99392807 
+ 
+##################################
+########g= 0.46 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 22
+ 
+Final energy = -6.29518926 
+ 
+##################################
+########g= 0.47 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 24
+ 
+Final energy = -6.60819148 
+ 
+##################################
+########g= 0.48 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 25
+ 
+Final energy = -6.93390535 
+ 
+##################################
+########g= 0.49 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 27
+ 
+Final energy = -7.27326451 
+ 
+##################################
+########g= 0.5 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 28
+ 
+Final energy = -7.62670782 
+ 
+##################################
+########g= 0.51 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 29
+ 
+Final energy = -7.99373687 
+ 
+##################################
+########g= 0.52 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 28
+ 
+Final energy = -8.37306947 
+ 
+##################################
+########g= 0.53 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 27
+ 
+Final energy = -8.76324196 
+ 
+##################################
+########g= 0.54 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 26
+ 
+Final energy = -9.16300879 
+ 
+##################################
+########g= 0.55 ########
+##################################
+ 
+####DMRG calculation####
+Construct MPO
+Start DMRG run
+ 
+Max. bond dimension: 26
+ 
+Final energy = -9.57140634 
+ 
