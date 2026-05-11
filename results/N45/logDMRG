@@ -1,0 +1,287 @@
+Sweep 1 E= 1.1727444551e+01 error= 8.4270068485e+01 MaxBondDim= 10 
+Sweep 2 E= 4.8010828537e+00 error= 1.4426665626e+00 MaxBondDim= 10 
+Sweep 3 E= 2.2700810950e+00 error= 1.1149389175e+00 MaxBondDim= 10 
+Sweep 4 E= 1.0179248239e+00 error= 1.2301068230e+00 MaxBondDim= 10 
+Sweep 5 E= 4.6201283512e-01 error= 1.2032392750e+00 MaxBondDim= 10 
+Sweep 6 E= 2.2626357283e-01 error= 1.0419231843e+00 MaxBondDim= 10 
+Sweep 7 E= 1.0950068349e-01 error= 1.0663211007e+00 MaxBondDim= 10 
+Sweep 8 E= 5.3845705907e-02 error= 1.0336010392e+00 MaxBondDim= 8 
+Sweep 9 E= 1.5878821034e-02 error= 2.3910392838e+00 MaxBondDim= 9 
+Sweep 10 E= 5.6829748988e-03 error= 1.7941036722e+00 MaxBondDim= 8 
+Sweep 11 E= 1.1735588092e-03 error= 3.8425139451e+00 MaxBondDim= 6 
+Sweep 12 E= 1.3406935054e-05 error= 8.6533713295e+01 MaxBondDim= 3 
+Sweep 13 E= 4.5489261723e-08 error= 2.9372747075e+02 MaxBondDim= 1 
+Sweep 14 E= 7.1200164646e-10 error= 6.2889264791e+01 MaxBondDim= 1 
+Sweep 15 E= 9.0351656363e-11 error= 6.8803386138e+00 MaxBondDim= 1 
+Sweep 16 E= 2.0384881881e-11 error= 3.4322874613e+00 MaxBondDim= 1 
+Sweep 17 E= 4.8899184078e-12 error= 3.1687570592e+00 MaxBondDim= 1 
+Sweep 18 E= 1.1807320763e-12 error= 3.1414292929e+00 MaxBondDim= 1 
+Sweep 19 E= 2.8564798067e-13 error= 3.1335215236e+00 MaxBondDim= 1 
+Sweep 20 E= 6.9205746139e-14 error= 3.1275182568e+00 MaxBondDim= 1 
+Sweep 21 E= 1.6791978818e-14 error= 3.1213573986e+00 MaxBondDim= 1 
+Sweep 22 E= 4.0809848638e-15 error= 3.1146878458e+00 MaxBondDim= 1 
+Sweep 23 E= 9.9355997324e-16 error= 3.1074368672e+00 MaxBondDim= 1 
+Sweep 24 E= 2.4235689800e-16 error= 3.0995737338e+00 MaxBondDim= 1 
+Sweep 25 E= 5.9240336365e-17 error= 3.0910790328e+00 MaxBondDim= 1 
+Sweep 26 E= 1.4512778201e-17 error= 3.0819432050e+00 MaxBondDim= 1 
+Sweep 27 E= 3.5638996931e-18 error= 3.0721623645e+00 MaxBondDim= 1 
+Sweep 28 E= 8.7743108263e-19 error= 3.0617431541e+00 MaxBondDim= 1 
+Sweep 29 E= 2.1661222152e-19 error= 3.0506998011e+00 MaxBondDim= 1 
+Sweep 30 E= 5.3629229289e-20 error= 3.0390701935e+00 MaxBondDim= 1 
+Sweep 31 E= 1.3317671949e-20 error= 3.0269222350e+00 MaxBondDim= 1 
+Sweep 32 E= 3.3176208326e-21 error= 3.0142236321e+00 MaxBondDim= 1 
+Sweep 33 E= 8.2919392756e-22 error= 3.0010192096e+00 MaxBondDim= 1 
+Sweep 34 E= 2.0796349132e-22 error= 2.9872091121e+00 MaxBondDim= 1 
+Sweep 35 E= 5.2339225960e-23 error= 2.9733772807e+00 MaxBondDim= 1 
+Sweep 36 E= 1.3219210990e-23 error= 2.9593305531e+00 MaxBondDim= 1 
+Sweep 37 E= 3.3492491043e-24 error= 2.9469178249e+00 MaxBondDim= 1 
+Sweep 38 E= 8.5156182714e-25 error= 2.9330662761e+00 MaxBondDim= 1 
+Sweep 39 E= 2.1753995129e-25 error= 2.9145077587e+00 MaxBondDim= 1 
+Sweep 40 E= 5.5827000600e-26 error= 2.8966799030e+00 MaxBondDim= 1 
+Sweep 41 E= 1.4443434425e-26 error= 2.8652164684e+00 MaxBondDim= 1 
+Sweep 42 E= 3.8502093915e-27 error= 2.7513373836e+00 MaxBondDim= 1 
+Sweep 43 E= 1.1198661605e-27 error= 2.4380978080e+00 MaxBondDim= 1 
+Sweep 44 E= 4.2332499987e-28 error= 1.6454052107e+00 MaxBondDim= 1 
+Sweep 45 E= 2.4540162274e-28 error= 7.2502934229e-01 MaxBondDim= 1 
+Sweep 46 E= 2.2376155675e-28 error= 9.6710383580e-02 MaxBondDim= 1 
+Sweep 47 E= 2.2363652996e-28 error= 5.5906249045e-04 MaxBondDim= 1 
+Sweep 48 E= 2.2363652996e-28 error= 0.0000000000e+00 MaxBondDim= 1 
+Convergence reached after sweep 48
+Sweep 1 E= 2.2363652996e-28 error= 4.4715413899e+30 MaxBondDim= 1 
+Sweep 2 E= 2.2363652996e-28 error= 6.0153255195e-16 MaxBondDim= 1 
+Convergence reached after sweep 2
+Sweep 1 E= -6.2065383093e-03 error= 1.6112141047e+05 MaxBondDim= 1 
+Sweep 2 E= -2.7567803821e-01 error= 9.7748627947e-01 MaxBondDim= 5 
+Sweep 3 E= -2.7570833242e-01 error= 1.0987775067e-04 MaxBondDim= 6 
+Sweep 4 E= -2.7570849700e-01 error= 5.9694212315e-07 MaxBondDim= 6 
+Sweep 5 E= -2.7570850501e-01 error= 2.9025329465e-08 MaxBondDim= 6 
+Sweep 6 E= -2.7570850676e-01 error= 6.3626404275e-09 MaxBondDim= 6 
+Convergence reached after sweep 6
+Sweep 1 E= -1.1118783610e+00 error= 9.0037895644e+02 MaxBondDim= 6 
+Sweep 2 E= -1.1119157361e+00 error= 3.3613281429e-05 MaxBondDim= 8 
+Sweep 3 E= -1.1119158836e+00 error= 1.3260912350e-07 MaxBondDim= 8 
+Sweep 4 E= -1.1119158335e+00 error= 4.5044320422e-08 MaxBondDim= 7 
+Sweep 5 E= -1.1119158344e+00 error= 8.0874766403e-10 MaxBondDim= 7 
+Convergence reached after sweep 5
+Sweep 1 E= -2.5405210588e+00 error= 3.9462003969e+02 MaxBondDim= 7 
+Sweep 2 E= -2.5407681515e+00 error= 9.7251170468e-05 MaxBondDim= 11 
+Sweep 3 E= -2.5407740963e+00 error= 2.3397716410e-06 MaxBondDim= 10 
+Sweep 4 E= -2.5407743222e+00 error= 8.8883018517e-08 MaxBondDim= 10 
+Sweep 5 E= -2.5407743294e+00 error= 2.8431952341e-09 MaxBondDim= 10 
+Convergence reached after sweep 5
+Sweep 1 E= -4.6383849327e+00 error= 2.1659228363e+02 MaxBondDim= 10 
+Sweep 2 E= -4.6391384071e+00 error= 1.6241688539e-04 MaxBondDim= 17 
+Sweep 3 E= -4.6392062331e+00 error= 1.4620170889e-05 MaxBondDim= 16 
+Sweep 4 E= -4.6392111197e+00 error= 1.0533387545e-06 MaxBondDim= 16 
+Sweep 5 E= -4.6392116071e+00 error= 1.0506717776e-07 MaxBondDim= 16 
+Sweep 6 E= -4.6392117353e+00 error= 2.7633125021e-08 MaxBondDim= 16 
+Sweep 7 E= -4.6392117745e+00 error= 8.4438505240e-09 MaxBondDim= 16 
+Convergence reached after sweep 7
+Sweep 1 E= -4.8916791058e+00 error= 2.0542878169e+02 MaxBondDim= 16 
+Sweep 2 E= -4.8916881810e+00 error= 1.8552254906e-06 MaxBondDim= 16 
+Sweep 3 E= -4.8916885089e+00 error= 6.7036722372e-08 MaxBondDim= 16 
+Sweep 4 E= -4.8916884399e+00 error= 1.4101736347e-08 MaxBondDim= 16 
+Sweep 5 E= -4.8916884510e+00 error= 2.2768135418e-09 MaxBondDim= 16 
+Convergence reached after sweep 5
+Sweep 1 E= -5.1529399415e+00 error= 1.9506397345e+02 MaxBondDim= 16 
+Sweep 2 E= -5.1529644369e+00 error= 4.7536663287e-06 MaxBondDim= 17 
+Sweep 3 E= -5.1529654512e+00 error= 1.9683948315e-07 MaxBondDim= 17 
+Sweep 4 E= -5.1529655044e+00 error= 1.0322625893e-08 MaxBondDim= 17 
+Sweep 5 E= -5.1529655215e+00 error= 3.3154520944e-09 MaxBondDim= 17 
+Convergence reached after sweep 5
+Sweep 1 E= -5.4234084770e+00 error= 1.8538589021e+02 MaxBondDim= 17 
+Sweep 2 E= -5.4234364275e+00 error= 5.1536438988e-06 MaxBondDim= 19 
+Sweep 3 E= -5.4234378772e+00 error= 2.6730348233e-07 MaxBondDim= 18 
+Sweep 4 E= -5.4234380141e+00 error= 2.5244709196e-08 MaxBondDim= 18 
+Sweep 5 E= -5.4234380209e+00 error= 1.2575105931e-09 MaxBondDim= 18 
+Convergence reached after sweep 5
+Sweep 1 E= -5.7035414352e+00 error= 1.7632966340e+02 MaxBondDim= 18 
+Sweep 2 E= -5.7035710833e+00 error= 5.1981808526e-06 MaxBondDim= 19 
+Sweep 3 E= -5.7035725562e+00 error= 2.5823343232e-07 MaxBondDim= 19 
+Sweep 4 E= -5.7035727286e+00 error= 3.0221424625e-08 MaxBondDim= 19 
+Sweep 5 E= -5.7035727619e+00 error= 5.8346836234e-09 MaxBondDim= 19 
+Convergence reached after sweep 5
+Sweep 1 E= -5.9938911635e+00 error= 1.6783652951e+02 MaxBondDim= 19 
+Sweep 2 E= -5.9939266477e+00 error= 5.9200181599e-06 MaxBondDim= 20 
+Sweep 3 E= -5.9939279422e+00 error= 2.1597009601e-07 MaxBondDim= 20 
+Sweep 4 E= -5.9939281191e+00 error= 2.9512315544e-08 MaxBondDim= 20 
+Sweep 5 E= -5.9939281464e+00 error= 4.5649782558e-09 MaxBondDim= 20 
+Convergence reached after sweep 5
+Sweep 1 E= -6.2951399522e+00 error= 1.5985270345e+02 MaxBondDim= 20 
+Sweep 2 E= -6.2951863254e+00 error= 7.3664516923e-06 MaxBondDim= 21 
+Sweep 3 E= -6.2951890472e+00 error= 4.3237026163e-07 MaxBondDim= 22 
+Sweep 4 E= -6.2951893423e+00 error= 4.6866015731e-08 MaxBondDim= 22 
+Sweep 5 E= -6.2951893510e+00 error= 1.3846836728e-09 MaxBondDim= 22 
+Convergence reached after sweep 5
+Sweep 1 E= -6.6081058742e+00 error= 1.5232929451e+02 MaxBondDim= 22 
+Sweep 2 E= -6.6081845968e+00 error= 1.1912893729e-05 MaxBondDim= 27 
+Sweep 3 E= -6.6081908730e+00 error= 9.4975752760e-07 MaxBondDim= 24 
+Sweep 4 E= -6.6081912899e+00 error= 6.3101628522e-08 MaxBondDim= 24 
+Sweep 5 E= -6.6081913769e+00 error= 1.3165133134e-08 MaxBondDim= 24 
+Sweep 6 E= -6.6081913957e+00 error= 2.8454552174e-09 MaxBondDim= 24 
+Convergence reached after sweep 6
+Sweep 1 E= -6.9337773858e+00 error= 1.4522153241e+02 MaxBondDim= 24 
+Sweep 2 E= -6.9338949355e+00 error= 1.6952904076e-05 MaxBondDim= 31 
+Sweep 3 E= -6.9339049865e+00 error= 1.4495496719e-06 MaxBondDim= 26 
+Sweep 4 E= -6.9339053624e+00 error= 5.4209170834e-08 MaxBondDim= 26 
+Sweep 5 E= -6.9339054345e+00 error= 1.0404394043e-08 MaxBondDim= 25 
+Sweep 6 E= -6.9339054614e+00 error= 3.8787657007e-09 MaxBondDim= 25 
+Convergence reached after sweep 6
+Sweep 1 E= -7.2731198488e+00 error= 1.3849257826e+02 MaxBondDim= 25 
+Sweep 2 E= -7.2732501562e+00 error= 1.7915978800e-05 MaxBondDim= 32 
+Sweep 3 E= -7.2732635466e+00 error= 1.8410523111e-06 MaxBondDim= 28 
+Sweep 4 E= -7.2732643651e+00 error= 1.1252779459e-07 MaxBondDim= 27 
+Sweep 5 E= -7.2732645025e+00 error= 1.8888770269e-08 MaxBondDim= 27 
+Sweep 6 E= -7.2732644776e+00 error= 3.4186721320e-09 MaxBondDim= 27 
+Convergence reached after sweep 6
+Sweep 1 E= -7.6265319921e+00 error= 1.3212119651e+02 MaxBondDim= 27 
+Sweep 2 E= -7.6266917614e+00 error= 2.0948699577e-05 MaxBondDim= 31 
+Sweep 3 E= -7.6267068945e+00 error= 1.9842208648e-06 MaxBondDim= 29 
+Sweep 4 E= -7.6267077215e+00 error= 1.0843050839e-07 MaxBondDim= 28 
+Sweep 5 E= -7.6267078508e+00 error= 1.6954011372e-08 MaxBondDim= 28 
+Sweep 6 E= -7.6267078765e+00 error= 3.3758487109e-09 MaxBondDim= 28 
+Convergence reached after sweep 6
+Sweep 1 E= -7.9936078798e+00 error= 1.2609995674e+02 MaxBondDim= 28 
+Sweep 2 E= -7.9937269374e+00 error= 1.4893870899e-05 MaxBondDim= 32 
+Sweep 3 E= -7.9937364278e+00 error= 1.1872349738e-06 MaxBondDim= 29 
+Sweep 4 E= -7.9937367820e+00 error= 4.4301180629e-08 MaxBondDim= 29 
+Sweep 5 E= -7.9937368569e+00 error= 9.3710134447e-09 MaxBondDim= 29 
+Convergence reached after sweep 5
+Sweep 1 E= -8.3729979318e+00 error= 1.2043153553e+02 MaxBondDim= 29 
+Sweep 2 E= -8.3730655937e+00 error= 8.0808922298e-06 MaxBondDim= 32 
+Sweep 3 E= -8.3730692751e+00 error= 4.3967571823e-07 MaxBondDim= 28 
+Sweep 4 E= -8.3730693678e+00 error= 1.1068845378e-08 MaxBondDim= 28 
+Sweep 5 E= -8.3730693723e+00 error= 5.4641454747e-10 MaxBondDim= 28 
+Convergence reached after sweep 5
+Sweep 1 E= -8.7631987846e+00 error= 1.1511358165e+02 MaxBondDim= 28 
+Sweep 2 E= -8.7632403058e+00 error= 4.7381058059e-06 MaxBondDim= 29 
+Sweep 3 E= -8.7632419502e+00 error= 1.8765338144e-07 MaxBondDim= 27 
+Sweep 4 E= -8.7632419752e+00 error= 2.8474880770e-09 MaxBondDim= 27 
+Convergence reached after sweep 4
+Sweep 1 E= -9.1629757184e+00 error= 1.1013485212e+02 MaxBondDim= 27 
+Sweep 2 E= -9.1630081162e+00 error= 3.5357092908e-06 MaxBondDim= 28 
+Sweep 3 E= -9.1630088733e+00 error= 8.2631122842e-08 MaxBondDim= 27 
+Sweep 4 E= -9.1630088870e+00 error= 1.4955440609e-09 MaxBondDim= 26 
+Convergence reached after sweep 4
+Sweep 1 E= -9.5713831223e+00 error= 1.0547810805e+02 MaxBondDim= 26 
+Sweep 2 E= -9.5714058065e+00 error= 2.3700026772e-06 MaxBondDim= 27 
+Sweep 3 E= -9.5714062917e+00 error= 5.0685319610e-08 MaxBondDim= 26 
+Sweep 4 E= -9.5714064281e+00 error= 1.4248487639e-08 MaxBondDim= 26 
+Sweep 5 E= -9.5714064396e+00 error= 1.2052764390e-09 MaxBondDim= 26 
+Convergence reached after sweep 5
+Sweep 1 E= -9.9876749076e+00 error= 1.0112340302e+02 MaxBondDim= 26 
+Sweep 2 E= -9.9876879291e+00 error= 1.3037559123e-06 MaxBondDim= 26 
+Sweep 3 E= -9.9876883146e+00 error= 3.8601719727e-08 MaxBondDim= 25 
+Sweep 4 E= -9.9876883798e+00 error= 6.5281457471e-09 MaxBondDim= 25 
+Convergence reached after sweep 4
+Sweep 1 E= -1.0411248376e+01 error= 9.7049960952e+01 MaxBondDim= 25 
+Sweep 2 E= -1.0411258437e+01 error= 9.6630233904e-07 MaxBondDim= 25 
+Sweep 3 E= -1.0411258794e+01 error= 3.4318043027e-08 MaxBondDim= 25 
+Sweep 4 E= -1.0411258817e+01 error= 2.2403245900e-09 MaxBondDim= 25 
+Convergence reached after sweep 4
+Sweep 1 E= -1.0841612072e+01 error= 9.3237205441e+01 MaxBondDim= 25 
+Sweep 2 E= -1.0841621987e+01 error= 9.1451406212e-07 MaxBondDim= 25 
+Sweep 3 E= -1.0841622370e+01 error= 3.5303303870e-08 MaxBondDim= 24 
+Sweep 4 E= -1.0841622416e+01 error= 4.2439521080e-09 MaxBondDim= 24 
+Convergence reached after sweep 4
+Sweep 1 E= -1.1278349544e+01 error= 8.9665455536e+01 MaxBondDim= 24 
+Sweep 2 E= -1.1278356219e+01 error= 5.9188316670e-07 MaxBondDim= 23 
+Sweep 3 E= -1.1278356532e+01 error= 2.7762458297e-08 MaxBondDim= 23 
+Sweep 4 E= -1.1278356624e+01 error= 8.0784188886e-09 MaxBondDim= 23 
+Convergence reached after sweep 4
+Sweep 1 E= -1.1721085063e+01 error= 8.6316333309e+01 MaxBondDim= 22 
+Sweep 2 E= -1.1721092054e+01 error= 5.9642223060e-07 MaxBondDim= 22 
+Sweep 3 E= -1.1721092410e+01 error= 3.0329238153e-08 MaxBondDim= 22 
+Sweep 4 E= -1.1721092431e+01 error= 1.7925034441e-09 MaxBondDim= 22 
+Convergence reached after sweep 4
+Sweep 1 E= -1.6419758939e+01 error= 6.1902233931e+01 MaxBondDim= 22 
+Sweep 2 E= -1.6420228043e+01 error= 2.8568647761e-05 MaxBondDim= 23 
+Sweep 3 E= -1.6420237188e+01 error= 5.5697039731e-07 MaxBondDim= 20 
+Sweep 4 E= -1.6420237298e+01 error= 6.6961367276e-09 MaxBondDim= 20 
+Convergence reached after sweep 4
+Sweep 1 E= -2.1494016992e+01 error= 4.7524574739e+01 MaxBondDim= 19 
+Sweep 2 E= -2.1494211250e+01 error= 9.0376545987e-06 MaxBondDim= 20 
+Sweep 3 E= -2.1494212667e+01 error= 6.5945891709e-08 MaxBondDim= 18 
+Sweep 4 E= -2.1494212716e+01 error= 2.2485645151e-09 MaxBondDim= 18 
+Convergence reached after sweep 4
+Sweep 1 E= -2.6840416608e+01 error= 3.8257245840e+01 MaxBondDim= 18 
+Sweep 2 E= -2.6840469839e+01 error= 1.9832440199e-06 MaxBondDim= 18 
+Sweep 3 E= -2.6840470318e+01 error= 1.7845242104e-08 MaxBondDim= 18 
+Sweep 4 E= -2.6840470325e+01 error= 2.4810465386e-10 MaxBondDim= 18 
+Convergence reached after sweep 4
+Sweep 1 E= -3.2399420175e+01 error= 3.1864749881e+01 MaxBondDim= 18 
+Sweep 2 E= -3.2399450650e+01 error= 9.4059952795e-07 MaxBondDim= 18 
+Sweep 3 E= -3.2399450664e+01 error= 4.3073326544e-10 MaxBondDim= 18 
+Convergence reached after sweep 3
+Sweep 1 E= -3.8132202843e+01 error= 2.7224553669e+01 MaxBondDim= 18 
+Sweep 2 E= -3.8132218704e+01 error= 4.1592543979e-07 MaxBondDim= 17 
+Sweep 3 E= -3.8132219031e+01 error= 8.5922442067e-09 MaxBondDim= 17 
+Convergence reached after sweep 3
+Sweep 1 E= -4.4011319949e+01 error= 2.3721427150e+01 MaxBondDim= 17 
+Sweep 2 E= -4.4011329687e+01 error= 2.2124720654e-07 MaxBondDim= 17 
+Sweep 3 E= -4.4011329721e+01 error= 7.8033801452e-10 MaxBondDim= 17 
+Convergence reached after sweep 3
+Sweep 1 E= -5.0016367042e+01 error= 2.0993455326e+01 MaxBondDim= 17 
+Sweep 2 E= -5.0016374076e+01 error= 1.4065085617e-07 MaxBondDim= 17 
+Sweep 3 E= -5.0016374455e+01 error= 7.5725405797e-09 MaxBondDim= 17 
+Convergence reached after sweep 3
+Sweep 1 E= -5.6131574779e+01 error= 1.8815284961e+01 MaxBondDim= 17 
+Sweep 2 E= -5.6131578241e+01 error= 6.1674003219e-08 MaxBondDim= 17 
+Sweep 3 E= -5.6131578208e+01 error= 5.7845919805e-10 MaxBondDim= 17 
+Convergence reached after sweep 3
+Sweep 1 E= -6.2344383827e+01 error= 1.7039937178e+01 MaxBondDim= 17 
+Sweep 2 E= -6.2344386206e+01 error= 3.8166120880e-08 MaxBondDim= 17 
+Sweep 3 E= -6.2344386220e+01 error= 2.2329075160e-10 MaxBondDim= 17 
+Convergence reached after sweep 3
+Sweep 1 E= -6.8644559877e+01 error= 1.5567796804e+01 MaxBondDim= 17 
+Sweep 2 E= -6.8644563415e+01 error= 5.1539667740e-08 MaxBondDim= 16 
+Sweep 3 E= -6.8644563394e+01 error= 3.1279750701e-10 MaxBondDim= 16 
+Convergence reached after sweep 3
+Sweep 1 E= -7.5023610530e+01 error= 1.4329137227e+01 MaxBondDim= 16 
+Sweep 2 E= -7.5023612435e+01 error= 2.5390908726e-08 MaxBondDim= 16 
+Sweep 3 E= -7.5023612475e+01 error= 5.4220646091e-10 MaxBondDim= 16 
+Convergence reached after sweep 3
+Sweep 1 E= -8.1474375814e+01 error= 1.3273797621e+01 MaxBondDim= 16 
+Sweep 2 E= -8.1474378926e+01 error= 3.8200041757e-08 MaxBondDim= 16 
+Sweep 3 E= -8.1474378955e+01 error= 3.5021830457e-10 MaxBondDim= 16 
+Convergence reached after sweep 3
+Sweep 1 E= -8.7990746450e+01 error= 1.2364831421e+01 MaxBondDim= 16 
+Sweep 2 E= -8.7990747835e+01 error= 1.5736662973e-08 MaxBondDim= 16 
+Sweep 3 E= -8.7990747850e+01 error= 1.7545661621e-10 MaxBondDim= 16 
+Convergence reached after sweep 3
+Sweep 1 E= -9.4567449660e+01 error= 1.1574463027e+01 MaxBondDim= 16 
+Sweep 2 E= -9.4567450579e+01 error= 9.7207044147e-09 MaxBondDim= 16 
+Convergence reached after sweep 2
+Sweep 1 E= -1.0119989505e+02 error= 1.0881433173e+01 MaxBondDim= 16 
+Sweep 2 E= -1.0119989621e+02 error= 1.1528527690e-08 MaxBondDim= 16 
+Sweep 3 E= -1.0119989622e+02 error= 6.8197708953e-11 MaxBondDim= 16 
+Convergence reached after sweep 3
+Sweep 1 E= -1.0788405623e+02 error= 1.0269210252e+01 MaxBondDim= 15 
+Sweep 2 E= -1.0788405683e+02 error= 5.5385351831e-09 MaxBondDim= 15 
+Convergence reached after sweep 2
+Sweep 1 E= -1.1461637300e+02 error= 9.7247569767e+00 MaxBondDim= 15 
+Sweep 2 E= -1.1461637375e+02 error= 6.5276318442e-09 MaxBondDim= 15 
+Convergence reached after sweep 2
+Sweep 1 E= -1.2139368066e+02 error= 9.2376610921e+00 MaxBondDim= 15 
+Sweep 2 E= -1.2139368147e+02 error= 6.7068413327e-09 MaxBondDim= 15 
+Convergence reached after sweep 2
+Sweep 1 E= -1.2821314873e+02 error= 8.7995120619e+00 MaxBondDim= 15 
+Sweep 2 E= -1.2821314948e+02 error= 5.8966779641e-09 MaxBondDim= 15 
+Convergence reached after sweep 2
+Sweep 1 E= -1.3507223173e+02 error= 8.4034461949e+00 MaxBondDim= 15 
+Sweep 2 E= -1.3507223381e+02 error= 1.5461538245e-08 MaxBondDim= 15 
+Sweep 3 E= -1.3507223382e+02 error= 5.4428135847e-11 MaxBondDim= 15 
+Convergence reached after sweep 3
+Sweep 1 E= -1.4196863091e+02 error= 8.0438095626e+00 MaxBondDim= 15 
+Sweep 2 E= -1.4196863156e+02 error= 4.5526566021e-09 MaxBondDim= 15 
+Convergence reached after sweep 2
+Sweep 1 E= -1.4890027712e+02 error= 7.7159042237e+00 MaxBondDim= 15 
+Sweep 2 E= -1.4890027248e+02 error= 3.1123773488e-08 MaxBondDim= 15 
+Sweep 3 E= -1.4890027249e+02 error= 7.4785798362e-11 MaxBondDim= 15 
+Convergence reached after sweep 3
+Sweep 1 E= -1.5586525387e+02 error= 7.4157981023e+00 MaxBondDim= 15 
+Sweep 2 E= -1.5586525441e+02 error= 3.4527967035e-09 MaxBondDim= 15 
+Convergence reached after sweep 2
+Sweep 1 E= -1.6286184599e+02 error= 7.1401735558e+00 MaxBondDim= 15 
+Sweep 2 E= -1.6286184645e+02 error= 2.8163497053e-09 MaxBondDim= 15 
+Convergence reached after sweep 2

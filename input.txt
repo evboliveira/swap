@@ -2,7 +2,7 @@
 m=	5	# equals N for DVR
 
 #Number of sites#
-Nsites=	45
+Nsites=	50
 Nbond= 200
 Nsweep=	100
 ecutoff=	1e-8

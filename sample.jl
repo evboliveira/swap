@@ -124,7 +124,7 @@ V6strength=parse(Float64, lsplit[2])
 ########
 
 #### RESULTS PATH ####
-res_path = "./results/N$(N)/"
+res_path = "./results/N$(Nsites)/"
 ######################
 
 f=open(res_path*"log_sample","w")
@@ -139,8 +139,8 @@ log_println(f,"V6 Strength ",V6strength)
 #Define output files#
 create_file("L.txt")
 create_file("entropy_swap.txt")
-create_file("entropy_swap0.txt")
-create_file("swap0.txt")
+create_file("NMentropy_swap.txt")
+create_file("NMswap.txt")
 
 #### Int Strength g values ####
 listg=[]
@@ -156,14 +156,12 @@ Ng = length(listg)
 Nsamples = 4000
 Na=mbond
 
-f=open("sample","w")
-
 fast = true #Fast sampling?
 
 for ig = 0:length(listg)-1
 	let
 		g= listg[ig+1]
-		mps_out=h5open(string("psi0_g",string(round(g,digits=3))),"r")
+		mps_out=h5open(string(res_path*"psi0/psi0_g",string(round(g,digits=3))),"r")
 		psi=read(mps_out,"MPS",MPS)
 		close(mps_out)
 
@@ -172,29 +170,20 @@ for ig = 0:length(listg)-1
 		#psi = orthogonalize(psi, 1)
 
 		## Lattice Bipartite samples ##
-		sample1_a=zeros(Int64,(Na))
-		sample1_b=zeros(Int64,(Na))
-		sample2_a=zeros(Int64,(Na))
-		sample2_b=zeros(Int64,(Na))
+		latt_swap1=zeros(Int64,(Nsites))
+		latt_swap2=zeros(Int64,(Nsites))
 
-		sample_swap1=zeros(Int64,(Nsites))
-		sample_swap2=zeros(Int64,(Nsites))
-
-		swap=zeros(Float64,Nsamples)
+		swap = zeros(Float64,Nsamples)
 		####
 
-		## Lattice NM samples ##
-		qsample1_a=zeros(Float64,(1))
-		qsample1_b=zeros(Float64,(Nsites-1))
-		qsample2_a=zeros(Float64,(1))
-		qsample2_b=zeros(Float64,(Nsites-1))
+		## Lattice NM samples (0th mode vs the rest Rth)##
+		NMlatt_swap1=zeros(Float64,(Nsites))
+		NMlatt_swap2=zeros(Float64,(Nsites))
 
-		qsample_swap1=zeros(Float64,(Nsites))
-		qsample_swap2=zeros(Float64,(Nsites))
-		inv_qsample_swap1=zeros(Int64,(Nsites))
-		inv_qsample_swap2=zeros(Int64,(Nsites))
+		inv_NMlatt_swap1=zeros(Int64,(Nsites))
+		inv_NMlatt_swap2=zeros(Int64,(Nsites))
 		
-		swap0=zeros(Float64,Nsamples)
+		NMswap = zeros(Float64,Nsamples)
 		####
 
 		## Total Ang. Mom. stats. ##
@@ -203,157 +192,106 @@ for ig = 0:length(listg)-1
 		nbin=(2*mmax+1)*Nsites
 		####
 
-		for conf=1:Nsamples
-			
-			s1=sample(psi) ## replica 1
-			s2=sample(psi) ## replica 2
+		for conf=1:Nsamples			
+			rep1=sample(psi) ## replica 1
+			rep2=sample(psi) ## replica 2
 
 			## Total Ang Mom Stats ##
-			L=0
-			Lbin=0
-			for i=1:Nsites
-				L+=s1[i]-mmax-1
-				Lbin+=s1[i]
-			end
+			L = sum(rep1 .-(mmax+1))
+			Lbin = sum(rep1)
 			totalL[conf]=L
 			totalLbin[conf]=Lbin/2
 			#####
 
 			## Lattice Bipartite sampling ##
-			for i=1:Na
-				sample1_a[i]= s1[i]
-				sample2_a[i]= s2[i]
-				sample1_b[i]= s1[i+Na]
-				sample2_b[i]= s2[i+Na]
-			end
-			for i=1:Na
-				sample_swap1[i]=sample2_a[i]
-				sample_swap1[i+Na]=sample1_b[i]
-				sample_swap2[i]=sample1_a[i]
-				sample_swap2[i+Na]=sample2_b[i]
-			end
-			#####
-
-			## discrete cosine transforms ##
-			qs1=dct(s1)
-			qs2=dct(s2)
-			####
-			
-			qsample1_a[1]= qs1[1]
-			qsample2_a[1]= qs2[1]
-			for i=2:Nsites
-				qsample1_b[i-1]= qs1[i]
-				qsample2_b[i-1]= qs2[i]
-			end
-
-			
-			qsample_swap1[1]=qsample2_a[1]
-			qsample_swap2[1]=qsample1_a[1]
-			for i=2:Nsites
-				qsample_swap1[i]=qsample1_b[i-1]
-				qsample_swap2[i]=qsample2_b[i-1]
-			end
-
-			qs1=qsample_swap1[:]
-			qs2=qsample_swap2[:]
-			st1=idct(qs1)
-			st2=idct(qs2)
-			for i=1:Nsites
-				if st1[i]>(2*mmax+1)
-					println("basis state out of range",st1[i])
-					st1[i]=2*mmax+1
-				end
-				if st1[i]<1
-					println("basis state out of range",st1[i])
-					st1[i]=1
-				end
-				if st2[i]>(2*mmax+1)
-					println("basis state out of range",st2[i])
-					st2[i]=2*mmax+1
-				end
-				if st2[i]<1
-					println("basis state out of range",st2[i])
-					st2[i]=1
-				end
-				inv_qsample_swap1[i]=round(Int,st1[i])
-				inv_qsample_swap2[i]=round(Int,st2[i])
-				#println(inv_qsample_swap1[conf,i]-mmax)
-				#println(inv_qsample_swap2[conf,i]-mmax)
-			end
-
-			sw1=sample_swap1[:]
-			if fast
-				V = ITensor(1.)
-				for j=1:Nsites
-					V *= (psi[j]*state(sites[j],sw1[j]))
-				end
-				wf1 = scalar(V)
-			else
-				wf1=inner(MPS(sites,sw1),psi)
-			end
-
-			sw2=sample_swap2[:]
-			if fast
-				V = ITensor(1.)
-				for j=1:Nsites
-					V *= (psi[j]*state(sites[j],sw2[j]))
-				end
-				wf2 = scalar(V)
-			else
-				wf2=inner(MPS(sites,sw2),psi)
-			end
+			latt_swap1[Na+1:Nsites] = rep1[N+1:Nsites] ## 1B --> 1B
+			latt_swap1[1:Na] = rep2[1:Na] 			   ## 1A --> 2A
+			latt_swap2[1:Na] = rep1[1:Na]              ## 2A --> 1A
+			latt_swap2[Na+1:Nsites] = rep2[N+1:Nsites] ## 2B --> 2B
 
 			if fast
-				V = ITensor(1.)
+				V1 = ITensor(1.)
+				V2 = ITensor(1.)
+				V3 = ITensor(1.)
+				V4 = ITensor(1.)
 				for j=1:Nsites
-					V *= (psi[j]*state(sites[j],s1[j]))
+					V1 *= (psi[j]*state(sites[j],latt_swap1[j]))
+					V2 *= (psi[j]*state(sites[j],latt_swap2[j]))
+					V3 *= (psi[j]*state(sites[j],rep1[j]))
+					V4 *= (psi[j]*state(sites[j],rep2[j]))
 				end
-				wf3 = scalar(V)
+				wf1 = scalar(V1)
+				wf2 = scalar(V2)
+				wf3 = scalar(V3)
+				wf4 = scalar(V4)
 			else
-				wf3=inner(MPS(sites,s1),psi)
-			end
-			
-			if fast
-				V = ITensor(1.)
-				for j=1:Nsites
-					V *= (psi[j]*state(sites[j],s2[j]))
-				end
-				wf4 = scalar(V)
-			else
-				wf4=inner(MPS(sites,s2),psi)
+				wf1=inner(MPS(sites,latt_swap1),psi)
+				wf2=inner(MPS(sites,latt_swap2),psi)
+				wf3=inner(MPS(sites,rep1),psi)
+				wf4=inner(MPS(sites,rep2),psi)
 			end
 
 			swap[conf]=real(wf1*wf2/wf3/wf4)
-			#println(f,swap[conf]," ",wf1," ",wf2," ",wf3," ",wf4);flush(f)
+			################################
 
-			# total m
-			sw1=inv_qsample_swap1[:]
-			V = ITensor(1.)
-			for j=1:Nsites
-				V *= (psi[j]*state(sites[j],sw1[j]))
-			end
-			wf1 = scalar(V)
-			sw2=inv_qsample_swap2[:]
-			V = ITensor(1.)
-			for j=1:Nsites
-				V *= (psi[j]*state(sites[j],sw2[j]))
-			end
-			wf2 = scalar(V)
 
-			value=real(wf1*wf2/wf3/wf4)
+			## NM lattice sampling ##
+
+			## discrete cosine transforms ##
+			NMrep1 = dct(rep1) ## NM replica 1
+			NMrep2 = dct(rep2) ## NM replica 2
+			##
+
+			NMlatt_swap1[2:Nsites] = NMrep1[2:Nsites]  ## 1_Rth --> 1_Rth
+			NMlatt_swap1[1] = NMrep2[1] 			   ## 1_0th --> 2_0th
+			NMlatt_swap2[1] = NMrep1[1]                ## 2_0th --> 1_0th
+			NMlatt_swap2[2:Nsites] = NMrep2[2:Nsites]  ## 2_Rth --> 2_Rth
+
+			## Inverse discrete cosine transforms ##
+			NMaux1 = idct(NMlatt_swap1)
+			NMaux2 = idct(NMlatt_swap2)
+
+			## Regularizing the basis states:
+			for i=1:Nsites
+				if NMaux1[i] > (2*mmax+1)
+					println("basis state out of range",NMaux1[i])
+					st1[i]=2*mmax+1
+				elseif NMaux1[i] < 1
+					println("basis state out of range",NMaux1[i])
+					NMaux1[i]=1
+				end
+				if NMaux2[i] > (2*mmax+1)
+					println("basis state out of range",NMaux2[i])
+					NMaux2[i]=2*mmax+1
+				elseif NMaux2[i] < 1
+					println("basis state out of range",NMaux2[i])
+					NMaux2[i]=1
+				end
+				inv_NMlatt_swap1[i]=round(Int,NMaux2[i])
+				inv_NMlatt_swap1[i]=round(Int,NMaux2[i])
+			end
+
+			V1 = ITensor(1.)
+			V2 = ITensor(1.)
+			for j=1:Nsites
+				V1 *= (psi[j]*state(sites[j],inv_NMlatt_swap1[j]))
+				V2 *= (psi[j]*state(sites[j],inv_NMlatt_swap2[j]))
+			end
+			wf1 = scalar(V1)
+			wf2 = scalar(V2)
+
+			value = real(wf1*wf2/wf3/wf4)
 			if value >0 && value <= 10
-				swap0[conf]=value
+				NMswap[conf]=value
 			end
-			#println(f,swap0[conf]," ",value," ",real(wf1)," ",real(wf2)," ",real(wf3)," ",real(wf4));flush(f)
-			#println(f,swap0[conf]," ",s1," ",s2," ",s3," ",s4);flush(f)
-
+			
 		end
 		swap_avg = mean(swap)
-		swap0_avg = mean(swap0)
+		NMswap_avg = mean(NMswap)
 		S2 = -log(swap_avg)
-		S20 = -log(swap0_avg)
+		NM_S2 = -log(NMswap_avg)
 		error = sqrt(var(swap)/Nsamples)/swap_avg
-		error0 = sqrt(var(swap0)/Nsamples)/swap0_avg
+		NMerror = sqrt(var(NMswap)/Nsamples)/NMswap_avg
 
 		# Define theoretical Gaussian distribution (mean=0, std=1)
 		d = Dist.Normal(mean(totalLbin), sqrt(var(totalLbin)))
@@ -382,8 +320,8 @@ for ig = 0:length(listg)-1
 		observable=[mean(totalL),sqrt(var(totalL)/Nsamples),var(totalL),SB.skewness(totalL),SB.kurtosis(totalL),pvalue(ks_test)]
 		write_output("L.txt",g,observable)
 		write_output_error("entropy_swap.txt",g,S2,error)
-		write_output_error("entropy_swap0.txt",g,S20,error0)
-		write_output_error("swap0.txt",g,swap0_avg,sqrt(var(swap0)/Nsamples))
+		write_output_error("NMentropy_swap.txt",g,NM_S2,NMerror)
+		write_output_error("NMswap.txt",g,NMswap_avg,sqrt(var(NMswap)/Nsamples))
 
 	end
 end
