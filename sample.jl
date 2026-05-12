@@ -162,7 +162,7 @@ for ig = 0:length(listg)-1
 			L = sum(rep1 .-(mmax+1))
 			Lbin = sum(rep1)
 			totalL[conf]=L
-			totalLbin[conf]=Lbin/2
+			totalLbin[conf]=Lbin ÷ 2
 			#####
 
 			## Lattice Bipartite sampling ##
