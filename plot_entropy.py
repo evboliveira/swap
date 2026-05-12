@@ -90,8 +90,6 @@ for n in Nlist:
 # plt.setp(ax1.spines.values(), linewidth=1)  
 
 
-
-
 list = np.zeros(nN)
 for g in [0.1,0.5,1.0, 2.0, 3.0]:
     print(np.where(glist==g))
