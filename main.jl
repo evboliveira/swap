@@ -82,43 +82,35 @@ function write_text(path,g,txt)
 end
 ########################################################
 
-#### LOADING INPUT ####
-f=open("input.txt")
-lines=readlines(f)
-close(f)
-lsplit=split(lines[2])
-mmax=parse(Int64, lsplit[2])
-lsplit=split(lines[5])
-# Nsites=parse(Int64, lsplit[2])
-lsplit=split(lines[6])
-Nbonds=parse(Int64, lsplit[2])
-lsplit=split(lines[7])
-Nsweep=parse(Int64, lsplit[2])
-lsplit=split(lines[8])
-e_cutoff=parse(Float64, lsplit[2])
-lsplit=split(lines[9])
-SVD_error=parse(Float64, lsplit[2])
-lsplit=split(lines[12])
-gstart=parse(Float64, lsplit[2])
-lsplit=split(lines[13])
-delta_g=parse(Float64, lsplit[2])
-lsplit=split(lines[14])
-Ng=parse(Int64, lsplit[2])
-lsplit=split(lines[15])
-mbond=parse(Int64, lsplit[2])
-lsplit=split(lines[18])
-pairs=lsplit[2]
-lsplit=split(lines[21])
-evod=lsplit[2]
-lsplit=split(lines[24])
-angle=parse(Float64, lsplit[2])
-angle=angle*pi/180.0
-lsplit=split(lines[25])
-Estrength=parse(Float64, lsplit[2])
-lsplit=split(lines[28])
-Nstates=parse(Int64, lsplit[2])
-lsplit=split(lines[31])
-V6strength=parse(Float64, lsplit[2])
+#### INPUT PARAMETERS ####
+# System
+Nsites = parse(Int, ARGS[1])
+listg = append!(
+    [g for g = 0.0 : 0.1 : 0.4],
+    [g for g = 0.41 : 0.01 : 0.60],
+    [g for g = 0.7 : 0.1 : 3.0])
+Ng = length(listg)
+mmax = 5
+mbond = Nsites ÷ 2 #for the bipartite entanglement
+pairs = "nearest" # nearest,allpairs
+evod = "all"	# all,dvr,all_real
+
+#Excited states#
+Nstates=	0
+
+# DMRG
+Nbonds = 200
+Nsweep = 100
+e_cutoff = 1e-8
+SVD_error = 1e-8
+
+#External electric field#
+angle =	0.0	#in degrees
+angle = angle*pi/180.0
+Estrength = 0.0
+
+# cos 6 phi local potential
+V6strength= 0.0  # test 0.1 to 100
 ########
 
 #### RESULTS PATH ####
@@ -260,14 +252,6 @@ else
 end
 
 operators(Nspec,Nphi,evod)
-
-listg=[]
-# listg = [g for g = 0.1 : 0.1 : 2.0]
-listg = append!(
-    [g for g = 0.0 : 0.1 : 0.4],
-    [g for g = 0.41 : 0.01 : 0.60],
-    [g for g = 0.7 : 0.1 : 3.0])
-Ng = length(listg)
 
 for ig = 0:Ng-1
 let
