@@ -434,9 +434,9 @@ let
 	        	f2=open(res_path*"log","a")
 	        	maxbond=maxlinkdim(psi)
 	        	log_println(f,"Max. bond dimension: ",maxbond)
-	        	println(f2)
-	        	println(f2,"Final energy "*string(istates)*". excited state= "*string(round(energy,digits=12))*"\n")
-        		println(f2)
+	        	log_println(f2)
+	        	log_println(f2,"Final energy "*string(istates)*". excited state= "*string(round(energy,digits=12))*"\n")
+        		log_println(f2)
         		close(f2)
         		wavefunction[istates+1]=psi
         		append!(energies,energy)
@@ -568,4 +568,3 @@ log_println(f,"Calculation finished.")
 close(f)
 
 mv("log", res_path*"logDMRG")
-cp("input.txt", res_path*"input.txt")
