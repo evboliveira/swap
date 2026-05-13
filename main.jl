@@ -84,7 +84,7 @@ end
 
 #### INPUT PARAMETERS ####
 # System
-Nsites = parse(Int, ARGS[1])
+Nsites = parse(Int, ARGS[1]) ## as an external argument
 listg = append!(
     [g for g = 0.0 : 0.1 : 0.4],
     [g for g = 0.41 : 0.01 : 0.60],
@@ -114,11 +114,18 @@ V6strength= 0.0  # test 0.1 to 100
 ########
 
 #### RESULTS PATH ####
-res_path = "./results/"
-time_stamp = Dates.format(now(),"dd-mm-yyyy_HH:MM:SS")
-res_path *= time_stamp
+
+## Locally
+# res_path = "./results/" 
+# time_stamp = Dates.format(now(),"dd-mm-yyyy_HH:MM:SS")
+# res_path *= time_stamp
+# mkdir(res_path)
+# res_path *= "/"
+
+## Compute Canada
+res_path = "/Users/evbdeoli/scratch/results/swap/"
+res_path *= "N$Nsites/"
 mkdir(res_path)
-res_path *= "/"
 mkdir(res_path*"psi0")
 ######################
 
