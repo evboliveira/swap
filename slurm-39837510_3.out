@@ -1,0 +1,47 @@
+Precompiling packages...
+    matrices Being precompiled by another process (pid: 89479, pidfile: /home/evbdeoli/.julia/compiled/v1.12/matrices.ji.pidfile)
+   1121.4 ms  ✓ matrices (serial)
+  1 dependency successfully precompiled in 1 seconds
+Precompiling packages...
+    390.1 ms  ✓ states (serial)
+  1 dependency successfully precompiled in 0 seconds
+Precompiling packages...
+   1531.8 ms  ✓ expectations (serial)
+  1 dependency successfully precompiled in 2 seconds
+Precompiling packages...
+    distributions Being precompiled by another process (pid: 89479, pidfile: /home/evbdeoli/.julia/compiled/v1.12/distributions.ji.pidfile)
+    581.1 ms  ✓ distributions (serial)
+  1 dependency successfully precompiled in 1 seconds
+Precompiling packages...
+   1159.8 ms  ✓ create_operators (serial)
+  1 dependency successfully precompiled in 1 seconds
+Precompiling packages...
+    340.8 ms  ✓ dvr (serial)
+  1 dependency successfully precompiled in 0 seconds
+Precompiling packages...
+    sign Being precompiled by another process (pid: 89479, pidfile: /home/evbdeoli/.julia/compiled/v1.12/sign.ji.pidfile)
+   1473.1 ms  ✓ sign (serial)
+  1 dependency successfully precompiled in 1 seconds
+ERROR: LoadError: unable to determine if /home/evbdeoli/scratch/results/swap/N3/psi0/psi0_g0.1 is accessible in the HDF5 format (file may not exist)
+Stacktrace:
+ [1] error(s::String)
+   @ Base ./error.jl:44
+ [2] h5open(filename::String, mode::String, fapl::HDF5.FileAccessProperties, fcpl::HDF5.FileCreateProperties; swmr::Bool)
+   @ HDF5 ~/.julia/packages/HDF5/8g5ny/src/file.jl:48
+ [3] h5open
+   @ ~/.julia/packages/HDF5/8g5ny/src/file.jl:20 [inlined]
+ [4] h5open(filename::String, mode::String; swmr::Bool, fapl::HDF5.FileAccessProperties, fcpl::HDF5.FileCreateProperties, pv::@Kwargs{})
+   @ HDF5 ~/.julia/packages/HDF5/8g5ny/src/file.jl:75
+ [5] h5open(filename::String, mode::String)
+   @ HDF5 ~/.julia/packages/HDF5/8g5ny/src/file.jl:63
+ [6] top-level scope
+   @ ~/Documents/swap/sample.jl:105
+ [7] include(mod::Module, _path::String)
+   @ Base ./Base.jl:306
+ [8] exec_options(opts::Base.JLOptions)
+   @ Base ./client.jl:317
+ [9] _start()
+   @ Base ./client.jl:550
+in expression starting at /home/evbdeoli/Documents/swap/sample.jl:101
+#### Sampling g=0.0
+#### Sampling g=0.1

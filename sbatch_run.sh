@@ -7,7 +7,7 @@
 #SBATCH --mail-type=end          # send email when job ends
 #SBATCH --mail-type=fail         # send email if job fails
 #SBATCH --mail-user=estevao.deoliveira@uwaterloo.ca
-#SBATCH --array=2-150
+#SBATCH --array=4-150
 
 module load julia/1.12.5
 
