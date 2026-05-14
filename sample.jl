@@ -6,7 +6,6 @@ import StatsBase as SB
 using HypothesisTests
 import Distributions as Dist
 using FFTW
-using Plots
 using HDF5
 push!(LOAD_PATH,"src/")
 # push!(LOAD_PATH,pwd())
