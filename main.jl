@@ -123,7 +123,7 @@ V6strength= 0.0  # test 0.1 to 100
 # res_path *= "/"
 
 ## Compute Canada
-res_path = "/Users/evbdeoli/scratch/results/swap/"
+res_path = "/home/evbdeoli/links/scratch/swap/"
 res_path *= "N$Nsites/"
 mkdir(res_path)
 mkdir(res_path*"psi0")
