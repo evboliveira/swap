@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J DMRG-PlaRot
+#SBATCH -J DMRG-PlaRot-Sample
 #SBATCH --time=48:00:00
 #SBATCH --mem-per-cpu=100G
 #SBATCH --account=rrg-pnroy
@@ -7,8 +7,8 @@
 #SBATCH --mail-type=end          # send email when job ends
 #SBATCH --mail-type=fail         # send email if job fails
 #SBATCH --mail-user=estevao.deoliveira@uwaterloo.ca
-#SBATCH --array=2-150
+#SBATCH --array=2-10
 
 module load julia/1.12.5
 
-julia /home/evbdeoli/Documents/swap/main.jl $SLURM_ARRAY_TASK_ID
+julia /home/evbdeoli/Documents/swap/sample.jl $SLURM_ARRAY_TASK_ID

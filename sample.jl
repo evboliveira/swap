@@ -70,11 +70,11 @@ evod = "all"	# all,dvr,all_real
 
 #### RESULTS PATH ###
 
-### Locally
-res_path = "./results/N$Nsites/"
+# ### Locally
+# res_path = "./results/N$Nsites/"
 
 ### Compute Canada
-# res_path = "/home/evbdeoli/scratch/results/swap/N$Nsites/"
+res_path = "/home/evbdeoli/links/scratch/swap/N$Nsites/"
 ######################
 
 #Define output files#
@@ -94,7 +94,7 @@ Ng = length(listg)
 ################################
 
 #### SAMPLING PROCEDURE #####
-Nsamples = 4000
+Nsamples = 10000
 Na=mbond
 
 fast = true #Fast sampling?
