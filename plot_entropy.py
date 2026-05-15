@@ -15,7 +15,7 @@ red = (195/255, 58/255, 50/255)
 green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
-Nlist = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+Nlist = [i for i in range(5,151)]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,3,25))), decimals=3)
 Ng = len(glist)
@@ -96,7 +96,8 @@ for g in [0.1,0.5,1.0, 2.0, 3.0]:
     ig = np.where(glist==g)[0][0]
     for iN in range(nN):
         ## Data extraction DMRG ##
-        res_path = "./results/N%i/"%Nlist[iN]
+        # res_path = "./results/N%i/"%Nlist[iN]
+        res_path = "/home/evbdeoli/scratch/results/swap/N%i/"%Nlist[iN]
         list[iN] = np.loadtxt(res_path+"NMentropy_swap.txt")[ig,1]
         
     plt.plot(Nlist, list, label='g=%.2f'%g)
