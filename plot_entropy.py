@@ -14,7 +14,7 @@ red = (195/255, 58/255, 50/255)
 green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
-Nlist = [i for i in range(4,28) if i%2!=0]
+Nlist = [i for i in range(50,150,5) if i%2!=0]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,3,25))), decimals=3)
 Ng = len(glist)
@@ -104,7 +104,3 @@ plt.imshow(data,
 
 
 plt.savefig("phase.png")
-
-for i in range(Ng):
-    mmax = np.ceil(2*np.sqrt(3*glist[i]))
-    print("g=%.2f, mmax=%.2f"%(glist[i], mmax))
