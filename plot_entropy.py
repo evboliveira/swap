@@ -14,7 +14,7 @@ red = (195/255, 58/255, 50/255)
 green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
-Nlist = [i for i in range(50,150,5) if i%2!=0]
+Nlist = [5,50,100,150]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,3,25))), decimals=3)
 Ng = len(glist)
@@ -30,11 +30,13 @@ for n in Nlist:
     plt.plot(glist,NMswap, label='N=%i'%n)
     plt.xlabel("g")
     plt.ylabel("Ent. Entropy")
+    # plt.yscale("log")
+    # plt.ylim(1e-3,1)
     plt.legend()
 plt.savefig('entropy_vs_g.png')
 plt.close()
 
-Nlist = [i for i in range(4,151)]
+Nlist = [i for i in range(4,100,1)]
 nN = len(Nlist)
 list = np.zeros(nN)
 for g in [0.1,0.5,1.0, 2.0, 3.0]:
@@ -49,6 +51,7 @@ for g in [0.1,0.5,1.0, 2.0, 3.0]:
     plt.plot(Nlist, list, label='g=%.2f'%g)
     plt.xlabel("N")
     plt.ylabel("Ent. Entropy")
+    # plt.yscale("log")
     plt.legend()
 plt.savefig('entropy_vs_N.png')
 plt.close()
@@ -60,7 +63,7 @@ plt.close()
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
 
-Nlist = np.array([i for i in range(10,30,1)])
+Nlist = np.array([i for i in range(4,100,1)])
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,3,25))), decimals=3)
 Ng = len(glist)

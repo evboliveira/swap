@@ -1,4 +1,4 @@
-ITensors.space(::SiteType"PlaRotor") = 11
+ITensors.space(::SiteType"PlaRotor") = 7
 
 #######################################################################
 function ITensors.op!(Op::ITensor,::OpName"T",::SiteType"PlaRotor" ,s::Index)

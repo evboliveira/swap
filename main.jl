@@ -90,7 +90,7 @@ listg = append!(
     [g for g = 0.41 : 0.01 : 0.60],
     [g for g = 0.7 : 0.1 : 3.0])
 Ng = length(listg)
-mmax = 5
+mmax = 3
 mbond = Nsites ÷ 2 #for the bipartite entanglement
 pairs = "nearest" # nearest,allpairs
 evod = "all"	# all,dvr,all_real
@@ -115,19 +115,20 @@ V6strength= 0.0  # test 0.1 to 100
 
 #### RESULTS PATH ####
 
-## Locally
-# res_path = "./results/" 
-# time_stamp = Dates.format(now(),"dd-mm-yyyy_HH:MM:SS")
-# res_path *= time_stamp
-# mkdir(res_path)
-# res_path *= "/"
-
-## Compute Canada
-res_path = "/home/evbdeoli/links/scratch/swap/"
-res_path *= "N$Nsites/"
+# Locally
+res_path = "./results/" 
+time_stamp = Dates.format(now(),"dd-mm-yyyy_HH:MM:SS")
+res_path *= time_stamp
 mkdir(res_path)
+res_path *= "/"
 mkdir(res_path*"psi0")
-######################
+
+# ## Compute Canada
+# res_path = "/home/evbdeoli/links/scratch/swap/"
+# res_path *= "N$Nsites/"
+# mkdir(res_path)
+# mkdir(res_path*"psi0")
+# ######################
 
 
 f=open(res_path*"log","w")
@@ -311,6 +312,7 @@ let
 	end	
 	#g = gstart + ig*delta_g
 	g= listg[ig+1]
+	mmax = ceil(sqrt(3*g))+1
 	f=open(res_path*"log","a")
 	log_println(f,"##################################")
 	log_println(f,"########g= ",g," ########")
