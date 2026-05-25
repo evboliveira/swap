@@ -93,7 +93,7 @@ Ng = length(listg)
 ################################
 
 #### SAMPLING PROCEDURE #####
-Nsamples = 10000
+Nsamples = 100000
 Na=mbond
 
 fast = true #Fast sampling?
