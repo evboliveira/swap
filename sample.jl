@@ -73,7 +73,7 @@ evod = "all"	# all,dvr,all_real
 # res_path = "./results/N$Nsites/"
 
 ### Compute Canada
-res_path = "/home/evbdeoli/scratch/results/swap/N$Nsites/"
+res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N$Nsites/"
 ######################
 
 #Define output files#
