@@ -21,7 +21,8 @@ Ng = len(glist)
 
 for n in Nlist:
     ## Data extraction DMRG ##
-    res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%n
+    res_path = "/Users/evbdeoli/Documents/swap_results/N%i/"%n
+    # res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
     # swap = np.loadtxt(res_path+"entropy_swap.txt")[0:,1]
     # swap_err = np.loadtxt(res_path+"entropy_swap.txt")[0:,2]
     NMswap = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
@@ -41,8 +42,8 @@ for g in [0.1,0.5,1.0, 2.0, 3.0]:
     ig = np.where(glist==g)[0][0]
     for iN in range(nN):
         ## Data extraction DMRG ##
-        # res_path = "./results/N%i/"%Nlist[iN]
-        res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
+        res_path = "/Users/evbdeoli/Documents/swap_results/N%i/"%Nlist[iN]
+        # res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
         list[iN] = np.loadtxt(res_path+"NMentropy_swap.txt")[ig,1]
         
     plt.plot(Nlist, list, label='g=%.2f'%g)
@@ -59,7 +60,7 @@ plt.close()
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
 
-Nlist = np.array([i for i in range(5,50)])
+Nlist = np.array([i for i in range(10,30,1)])
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,3,25))), decimals=3)
 Ng = len(glist)
@@ -67,7 +68,8 @@ Ng = len(glist)
 data = np.zeros((Ng,nN))
 for iN in range(nN):
     ## Data extraction DMRG ##
-    res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
+    res_path = "/Users/evbdeoli/Documents/swap_results/N%i/"%Nlist[iN]
+    # res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
     data[:,iN] = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
 
 # def Z_func(g,N):
