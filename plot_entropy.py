@@ -14,7 +14,7 @@ red = (195/255, 58/255, 50/255)
 green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
-Nlist = [5,50,100,150]
+Nlist = [100,150]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,3,25))), decimals=3)
 Ng = len(glist)
