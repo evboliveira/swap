@@ -1,0 +1,5 @@
+#mmax= 10
+#m-states: all states (FBR)
+#Nr. of sites: 3
+ 
+0.0 2.046558735092064e-28
