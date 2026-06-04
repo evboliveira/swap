@@ -15,7 +15,7 @@ green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
 # Nlist = [5,10,50,100,150]
-Nlist = [i for i in range(20,31)]
+Nlist = [i for i in range(4,51) if i%2==0][0::2]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,5,45))), decimals=3)
 Ng = len(glist)
@@ -31,8 +31,9 @@ for n in Nlist:
     plt.plot(glist,NMswap, label='N=%i'%n)
     plt.xlabel("g")
     plt.ylabel("Ent. Entropy")
+    plt.title("Even # of sites")
     plt.legend()
-plt.savefig('entropy_vs_g.png')
+plt.savefig('entropy_vs_g(evenN).png')
 plt.close()
 
 Nlist = [i for i in range(4,51)]
@@ -61,7 +62,7 @@ plt.close()
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
 
-Nlist = np.array([i for i in range(18,51,1)])
+Nlist = np.array([i for i in range(5,51,1)])
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,5,45))), decimals=3)
 Ng = len(glist)
