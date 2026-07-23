@@ -15,7 +15,8 @@ green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
 # Nlist = [5,10,50,100,150]
-Nlist = [i for i in range(4,51) if i%2==0][0::2]
+Nlist = [i for i in range(19,51) if (i%2)!=0][0::1]
+# Nlist = [i for i in range(15,51)][0::5]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,5,45))), decimals=3)
 Ng = len(glist)
@@ -30,16 +31,19 @@ for n in Nlist:
     NMswap_err = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,2]
     plt.plot(glist,NMswap, label='N=%i'%n)
     plt.xlabel("g")
+    # plt.xscale("log")
+    # plt.xlim((0,1))
     plt.ylabel("Ent. Entropy")
-    plt.title("Even # of sites")
+    # plt.title("Even # of sites")
     plt.legend()
-plt.savefig('entropy_vs_g(evenN).png')
+plt.savefig('entropy_vs_g.png')
 plt.close()
 
 Nlist = [i for i in range(4,51)]
 nN = len(Nlist)
 list = np.zeros(nN)
-for g in [0.1,0.5,1.0, 2.0, 3.0, 5.0]:
+aux = [0.1, 1.0, 2.0,5.0]
+for g in aux:
     print(np.where(glist==g))
     ig = np.where(glist==g)[0][0]
     for iN in range(nN):
