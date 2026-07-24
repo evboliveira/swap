@@ -14,8 +14,8 @@ red = (195/255, 58/255, 50/255)
 green = (0/255, 158/255, 115/255)
 orange = (230/255, 159/255, 0/255)
 
-# Nlist = [5,10,50,100,150]
-Nlist = [i for i in range(19,51) if (i%2)!=0][0::1]
+Nlist = [30,33,36,39,42,45,47,50]
+# Nlist = [i for i in range(20,51) if (i%2)==0][0::2]
 # Nlist = [i for i in range(15,51)][0::5]
 nN = len(Nlist)
 glist = np.round(np.append(np.linspace(0,0.4,5), np.append(np.linspace(0.41,0.59,19),np.linspace(0.6,5,45))), decimals=3)
@@ -39,10 +39,28 @@ for n in Nlist:
 plt.savefig('entropy_vs_g.png')
 plt.close()
 
-Nlist = [i for i in range(4,51)]
+for n in Nlist:
+    ## Data extraction DMRG ##
+    res_path = "results/28may2026/N%i/"%n
+    # res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
+    # swap = np.loadtxt(res_path+"entropy_swap.txt")[0:,1]
+    # swap_err = np.loadtxt(res_path+"entropy_swap.txt")[0:,2]
+    NMswap = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
+    NMswap_err = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,2]
+    plt.plot(glist[25:],np.gradient(NMswap,glist)[25:], label='N=%i'%n)
+    plt.xlabel("g")
+    # plt.xscale("log")
+    # plt.xlim((0,1))
+    plt.ylabel("Gradiant Ent. Entropy")
+    # plt.title("Even # of sites")
+    plt.legend()
+plt.savefig('grad_entropy_vs_g.png')
+plt.close()
+
+Nlist = [i for i in range(10,51)]
 nN = len(Nlist)
 list = np.zeros(nN)
-aux = [0.1, 1.0, 2.0,5.0]
+aux = [0.1, 0.5, 1.0, 2.0,5.0]
 for g in aux:
     print(np.where(glist==g))
     ig = np.where(glist==g)[0][0]
@@ -112,3 +130,4 @@ plt.imshow(data,
 
 
 plt.savefig("phase.png")
+plt.close
