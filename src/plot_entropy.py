@@ -47,7 +47,7 @@ for n in Nlist:
     # swap_err = np.loadtxt(res_path+"entropy_swap.txt")[0:,2]
     NMswap = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
     NMswap_err = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,2]
-    plt.plot(glist[25:],np.gradient(NMswap,glist)[25:], label='N=%i'%n)
+    plt.plot(glist[:25],np.gradient(NMswap,glist)[:25], label='N=%i'%n)
     plt.xlabel("g")
     # plt.xscale("log")
     # plt.xlim((0,1))
