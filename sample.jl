@@ -219,11 +219,14 @@ for ig = 0:length(listg)-1
 			end
 			
 		end
+		## Lattice Bi-Partite Entanglement (averaging)
 		swap_avg = mean(swap)
-		NMswap_avg = mean(NMswap)
 		S2 = -log(swap_avg)
-		NM_S2 = -log(NMswap_avg)
 		error = sqrt(var(swap)/Nsamples)/swap_avg
+		
+		## Normal Modes Bi-Partite Entanglement (averaging)
+		NMswap_avg = mean(NMswap)
+		NM_S2 = -log(NMswap_avg)
 		NMerror = sqrt(var(NMswap)/Nsamples)/NMswap_avg
 
 		# Define theoretical Gaussian distribution (mean=0, std=1)
@@ -252,7 +255,7 @@ for ig = 0:length(listg)-1
 		write_output(res_path*"L.txt",g,observable)
 		write_output_error(res_path*"entropy_swap.txt",g,S2,error)
 		write_output_error(res_path*"NMentropy_swap.txt",g,NM_S2,NMerror)
-		write_output_error(res_path*"NMswap.txt",g,NMswap_avg,sqrt(var(NMswap)/Nsamples))
+		write_output_error(res_path*"NMswap.txt",g,NMswap_avg,sqrt(var(NMswap)/Nsamples)) ## purity
 
 	end
 end
