@@ -9,4 +9,4 @@
 
 module load julia/1.12.5
 
-julia /home/evbdeoli/Documents/swap/sample.jl $SLURM_ARRAY_TASK_ID
+julia /home/evbdeoli/Documents/swap/directNMsample.jl $SLURM_ARRAY_TASK_ID

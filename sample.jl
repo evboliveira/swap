@@ -80,8 +80,7 @@ res_path = "/home/evbdeoli/scratch/results/swap/28may2026/N$Nsites/"
 
 #Define output files#
 create_file(res_path*"L.txt")
-create_file(res_path*"entr
-opy_swap.txt")
+create_file(res_path*"entropy_swap.txt")
 create_file(res_path*"NMentropy_swap.txt")
 create_file(res_path*"NMswap.txt")
 

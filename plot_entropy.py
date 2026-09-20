@@ -22,12 +22,17 @@ Ng = len(glist)
 
 for n in Nlist:
     ## Data extraction DMRG ##
-    res_path = "results/28may2026/N%i/"%n
+    # res_path = "results/28may2026/N%i/"%n
+    res_path = "/home/evbdeoli/scratch/results/swap/28may2026/N%i/"%n
+
     # res_path = "/home/evbdeoli/scratch/results/swap/20may2026/N%i/"%Nlist[iN]
     # swap = np.loadtxt(res_path+"entropy_swap.txt")[0:,1]
     # swap_err = np.loadtxt(res_path+"entropy_swap.txt")[0:,2]
-    NMswap = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
-    NMswap_err = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,2]
+    # NMswap = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
+    # NMswap_err = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,2]
+
+    NMswap = np.loadtxt(res_path+"directNMswap.txt")[0:,1]
+    NMswap_err = np.loadtxt(res_path+"directNMswap.txt")[0:,2]
     plt.plot(glist,NMswap, label='N=%i'%n)
     plt.xlabel("g")
     plt.ylabel("Ent. Entropy")
@@ -43,7 +48,8 @@ for g in [0.1,0.5,1.0, 2.0, 3.0, 5.0]:
     ig = np.where(glist==g)[0][0]
     for iN in range(nN):
         ## Data extraction DMRG ##
-        res_path = "results/28may2026/N%i/"%Nlist[iN]
+        res_path = "/home/evbdeoli/scratch/results/swap/28may2026/N%i/"%Nlist[iN]
+        # res_path = "results/28may2026/N%i/"%Nlist[iN]
         # res_path = "results/swap/20may2026/N%i/"%Nlist[iN]
         list[iN] = np.loadtxt(res_path+"NMentropy_swap.txt")[ig,1]
         
@@ -69,9 +75,11 @@ Ng = len(glist)
 data = np.zeros((Ng,nN))
 for iN in range(nN):
     ## Data extraction DMRG ##
-    res_path = "results/28may2026/N%i/"%Nlist[iN]
     # res_path = "results/28may2026/N%i/"%Nlist[iN]
-    data[:,iN] = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
+    res_path = "/home/evbdeoli/scratch/results/swap/28may2026/N%i/"%Nlist[iN]
+    # res_path = "results/28may2026/N%i/"%Nlist[iN]
+    # data[:,iN] = np.loadtxt(res_path+"NMentropy_swap.txt")[0:,1]
+    data[:,iN] = np.loadtxt(res_path+"directNMswap.txt")[0:,1]
 
 # def Z_func(g,N):
 #     return data[np.where(glist==g)[0][0], np.where(Nlist==N)[0][0]]
